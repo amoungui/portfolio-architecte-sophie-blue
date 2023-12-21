@@ -186,3 +186,8 @@ footer nav ul {
 	margin: 2em
 }
 
+.navigation{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
