@@ -187,9 +187,14 @@ footer nav ul {
 }
 
 .navigation{
-	display: flex;
-	flex-direction: row;
 	justify-content: center;
+	width: 585px;
+	height: 37px;
+	top: 812px;
+	left: 427px;
+	border-radius: 60px;
+	border: 1px;
+
 }
 
 .nav_link{
