@@ -4,6 +4,10 @@ const works = fetch('http://localhost:5678/api/works')
   .then(response => response.json())
   .then(data => {
     console.log(data);
+    fetchData(data)
+  });
+  
+async function fetchData(data) {
     for (let i = 0; i < data.length; i++) {
         // Récupération de l'élément du DOM qui accueillera les travaux
         const sectionWorks = document.querySelector(".gallery");
@@ -22,5 +26,5 @@ const works = fetch('http://localhost:5678/api/works')
         workElement.appendChild(imageElement);
         workElement.appendChild(figcaptionElement);
     }
-  });
-
+    return sectionWorks
+}    
