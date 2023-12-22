@@ -8,51 +8,51 @@ links = {
 // Récupération des travaux depuis l'API
 const sectionWorks = document.querySelector(".gallery");
 const works = fetch('http://localhost:5678/api/works')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    // Afficher par defaut toutes les données sur les travaux
-    defaultData(data);
-    // Récupération des liens de navigation
-    const links = document.querySelectorAll(".nav_link");
-    console.log(links[1].classList[1])
-    // Ajout d'un gestionnaire d'événements click à chaque lien
-    links.forEach(link => {
-        console.log(link.classList[1])
-        link.addEventListener("click", function(event) {
-            event.preventDefault();
-            // Nous recuperons chaque categorie en fonction de sa clé
-            const category = getCategoryByKey(link.classList[1]);
-            // Effectuons les conditions sur les catégories
-            if (category === "tous") {
-                fetchData(data, null);
-            } else {
-                fetchData(data, category);
-            }
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        // Afficher par defaut toutes les données sur les travaux
+        defaultData(data);
+        // Récupération des liens de navigation
+        const links = document.querySelectorAll(".nav_link");
+        console.log(links[1].classList[1])
+        // Ajout d'un gestionnaire d'événements click à chaque lien
+        links.forEach(link => {
+            console.log(link.classList[1])
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+                // Nous recuperons chaque categorie en fonction de sa clé
+                const category = getCategoryByKey(link.classList[1]);
+                // Effectuons les conditions sur les catégories
+                if (category === "tous") {
+                    fetchData(data, null);
+                } else {
+                    fetchData(data, category);
+                }
+            });
         });
     });
-  });
 
-function getCategoryByKey(key){
+function getCategoryByKey(key) {
     if (key in links) {
         return links[key];
-      } else {
+    } else {
         return null;
-      }
+    }
 }
 
 
-function capitalize(myString){
+function capitalize(myString) {
     const capitalizedString = myString.charAt(0).toUpperCase() + myString.slice(1);
-    return capitalizedString;  
+    return capitalizedString;
 }
 
 
 async function fetchData(data, category) {
     let filteredData;
-    if (category !== null){
+    if (category !== null) {
         filteredData = data.filter(item => item.category.name === category);
-    }else{
+    } else {
         filteredData = data
     }
 
