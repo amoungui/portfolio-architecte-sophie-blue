@@ -4,11 +4,18 @@ const works = fetch('http://localhost:5678/api/works')
   .then(response => response.json())
   .then(data => {
     console.log(data);
-    fetchData(data)
+    fetchData(data, "Objets")
   });
-  
-async function fetchData(data) {
-    for (let i = 0; i < data.length; i++) {
+
+  async function fetchData(data, category) {
+    let filteredData;
+    if (category){
+        filteredData = data.filter(item => item.category.name === category);
+    }else{
+        filteredData = data
+    }
+
+    for (let i = 0; i < filteredData.length; i++) {
         // Récupération de l'élément du DOM qui accueillera les travaux
         const sectionWorks = document.querySelector(".gallery");
         // Création d’une balise dédiée à un travail
@@ -16,15 +23,15 @@ async function fetchData(data) {
         // On crée l’élément img.
         const imageElement = document.createElement("img");
         // On accède à l’indice i de la liste pieces pour configurer la source de l’image.
-        imageElement.src = data[i].imageUrl;
+        imageElement.src = filteredData[i].imageUrl;
         // Idem pour le nom ... 
         const figcaptionElement = document.createElement("figcaption");
-        figcaptionElement.innerHTML = data[i].title;
+        figcaptionElement.innerHTML = filteredData[i].title;
         // On rattache la balise article à la section Fiches
         sectionWorks.appendChild(workElement);
         // On rattache l’image à pieceElement (la balise article)
         workElement.appendChild(imageElement);
         workElement.appendChild(figcaptionElement);
     }
-    return sectionWorks
-}    
+    return sectionWorks;
+}
