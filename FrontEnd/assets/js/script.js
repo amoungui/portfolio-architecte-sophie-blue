@@ -1,37 +1,75 @@
+links = {
+    "tous": "Tous",
+    "objets": "Objets",
+    "appartements": "Appartements",
+    "hotels_restaurants": "Hotels & restaurants"
+}
+
 // Récupération des travaux depuis l'API
 const sectionWorks = document.querySelector(".gallery");
 const works = fetch('http://localhost:5678/api/works')
   .then(response => response.json())
   .then(data => {
     console.log(data);
-    fetchData(data, "Objets")
+    // Récupération des liens de navigation
+    const links = document.querySelectorAll(".nav_link");
+    console.log(links[1].classList[1])
+    // Ajout d'un gestionnaire d'événements click à chaque lien
+    links.forEach(link => {
+        console.log(link.classList[1])
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            const category = getCategoryByKey(link.classList[1]);
+            console.log(category)
+            fetchData(data, category);
+        });
+    });
   });
 
-  async function fetchData(data, category) {
+function getCategoryByKey(key){
+    if (key in links) {
+        return links[key];
+      } else {
+        return null;
+      }
+}
+
+
+function capitalize(myString){
+    const capitalizedString = myString.charAt(0).toUpperCase() + myString.slice(1);
+    return capitalizedString;  
+}
+
+
+async function fetchData(data, category) {
     let filteredData;
-    if (category){
+    if (category !== null){
         filteredData = data.filter(item => item.category.name === category);
     }else{
         filteredData = data
     }
 
-    for (let i = 0; i < filteredData.length; i++) {
-        // Récupération de l'élément du DOM qui accueillera les travaux
-        const sectionWorks = document.querySelector(".gallery");
-        // Création d’une balise dédiée à un travail
+    // Récupération de l'élément du DOM qui accueillera les travaux
+    const sectionWorks = document.querySelector(".gallery");
+
+    // Suppression des travaux existants
+    sectionWorks.innerHTML = "";
+
+    // Création d'une balise dédiée à chaque travail
+    filteredData.forEach(item => {
         const workElement = document.createElement("figure");
         // On crée l’élément img.
         const imageElement = document.createElement("img");
         // On accède à l’indice i de la liste pieces pour configurer la source de l’image.
-        imageElement.src = filteredData[i].imageUrl;
+        imageElement.src = item.imageUrl;
         // Idem pour le nom ... 
         const figcaptionElement = document.createElement("figcaption");
-        figcaptionElement.innerHTML = filteredData[i].title;
+        figcaptionElement.innerHTML = item.title;
         // On rattache la balise article à la section Fiches
         sectionWorks.appendChild(workElement);
         // On rattache l’image à pieceElement (la balise article)
         workElement.appendChild(imageElement);
         workElement.appendChild(figcaptionElement);
-    }
-    return sectionWorks;
+    });
 }
+  
