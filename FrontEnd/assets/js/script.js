@@ -33,6 +33,9 @@ const works = fetch('http://localhost:5678/api/works')
         });
     });
 
+// fonction qui prend la class comme clé et retourne la categorie correspondante
+// dans le tableau links, tableau qui fait la correspondance 
+// entre la class et la categorie    
 function getCategoryByKey(key) {
     if (key in links) {
         return links[key];
@@ -41,13 +44,15 @@ function getCategoryByKey(key) {
     }
 }
 
-
+// function qui prend une chaine et la met la première lettre
+// en majuscule
 function capitalize(myString) {
     const capitalizedString = myString.charAt(0).toUpperCase() + myString.slice(1);
     return capitalizedString;
 }
 
-
+// function permet de retourner les données de l'API en fonction
+// de la categorie qui lui est passée
 async function fetchData(data, category) {
     let filteredData;
     if (category !== null) {
@@ -67,20 +72,20 @@ async function fetchData(data, category) {
         const workElement = document.createElement("figure");
         // On crée l’élément img.
         const imageElement = document.createElement("img");
-        // On accède à l’indice i de la liste pieces pour configurer la source de l’image.
+        // On accède à l’indice i de la liste des travaux pour configurer la source de l’image.
         imageElement.src = item.imageUrl;
-        // Idem pour le nom ... 
+        // Idem pour le titre 
         const figcaptionElement = document.createElement("figcaption");
         figcaptionElement.innerHTML = item.title;
-        // On rattache la balise article à la section Fiches
+        // On rattache la balise figure à la section gallery
         sectionWorks.appendChild(workElement);
-        // On rattache l’image à pieceElement (la balise article)
+        // On rattache l’image à workElement (la balise figure)
         workElement.appendChild(imageElement);
         workElement.appendChild(figcaptionElement);
     });
 }
 
-
+// fonction qui affiche la liste de travaux par défaut sur la page d'acceuille
 async function defaultData(data) {
     for (let i = 0; i < data.length; i++) {
         // Récupération de l'élément du DOM qui accueillera les travaux
@@ -89,14 +94,14 @@ async function defaultData(data) {
         const workElement = document.createElement("figure");
         // On crée l’élément img.
         const imageElement = document.createElement("img");
-        // On accède à l’indice i de la liste pieces pour configurer la source de l’image.
+        // On accède à l’indice i de la liste destravaux pour configurer la source de l’image.
         imageElement.src = data[i].imageUrl;
         // Idem pour le nom ... 
         const figcaptionElement = document.createElement("figcaption");
         figcaptionElement.innerHTML = data[i].title;
-        // On rattache la balise article à la section Fiches
+        // On rattache la balise figure à la section gallery
         sectionWorks.appendChild(workElement);
-        // On rattache l’image à pieceElement (la balise article)
+        // On rattache l’image à workElement
         workElement.appendChild(imageElement);
         workElement.appendChild(figcaptionElement);
     }
