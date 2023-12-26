@@ -29,11 +29,10 @@ const works = fetch('http://localhost:5678/api/works')
                 }                
                 // Nous recuperons chaque categorie en fonction de sa clé
                 const category = getCategoryByKey(link.classList[1]);
-                // all.classList.remove("active");
                 // Ajouter la classe active au lien cliqué
                 this.className += " active";
                 // Effectuons les conditions sur les catégories
-                if (category === "tous") {
+                if (category === "Tous") {
                     fetchData(data, null);
                 } else {
                     fetchData(data, category);
