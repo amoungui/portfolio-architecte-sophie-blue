@@ -15,6 +15,7 @@ const works = fetch('http://localhost:5678/api/works')
         defaultData(data);
         // Récupération des liens de navigation
         const links = document.querySelectorAll(".nav_link");
+        var all = document.querySelectorAll("tous");
         console.log(links[1].classList[1])
         // Ajout d'un gestionnaire d'événements click à chaque lien
         links.forEach(link => {
@@ -24,9 +25,11 @@ const works = fetch('http://localhost:5678/api/works')
                 // Retirer la classe active de tous les liens tous
                 for (let j = 0; j < links.length; j++) {
                     links[j].className = links[j].className.replace(" active", "");
+                    links[j].classList.remove("active");
                 }                
                 // Nous recuperons chaque categorie en fonction de sa clé
                 const category = getCategoryByKey(link.classList[1]);
+                // all.classList.remove("active");
                 // Ajouter la classe active au lien cliqué
                 this.className += " active";
                 // Effectuons les conditions sur les catégories
@@ -38,26 +41,7 @@ const works = fetch('http://localhost:5678/api/works')
             });
         });
     });
-    
-function link_selected(data, category){
-    // gestion de la class active lors d'un clics des boutons de navigation
-    var links = document.getElementsByClassName("nav_link"); // obtenir la référence des point dot
-    // mise à jour des dots
-    for (let i = 0; i < links.length; i++) {
-        links[i].addEventListener("click", function (event) {
-            event.preventDefault();
 
-            // Retirer la classe active de tous les liens tous
-            for (let j = 0; j < links.length; j++) {
-                links[j].className = links[j].className.replace(" active", "");
-            }
-
-            // Ajouter la classe active au lien cliqué
-            this.className += " active";
-            fetchData(data, category);
-        });
-    }
-}
 
 // fonction qui prend la class comme clé et retourne la categorie correspondante
 // dans le tableau links, tableau qui fait la correspondance 
