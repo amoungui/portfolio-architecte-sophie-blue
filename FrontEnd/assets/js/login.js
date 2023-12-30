@@ -19,7 +19,7 @@ function ajoutListenerLogin() {
         })
         .then(response => {
             if(response.status === 200) {
-                window.location.href = "/home"; // Redirige vers la page d'accueil
+                window.location.href = "/FrontEnd/"; // Redirige vers la page d'accueil
                 console.log(response.status)
             } else {
                 console.log('Erreur de connexion');
@@ -29,7 +29,7 @@ function ajoutListenerLogin() {
                 return response.json();
             } else {
                 console.log(response)
-                // throw new Error('La réponse du serveur n\'est pas un JSON valide');
+                throw new Error('La réponse du serveur n\'est pas un JSON valide');
             }
         })
         .then(data => {
