@@ -21,6 +21,13 @@ function ajoutListenerLogin() {
             if(response.status === 200) {
                 window.location.href = "/FrontEnd/"; // Redirige vers la page d'accueil
                 console.log(response.status)
+                // Stockage des informations dans le localStorage
+                if (window.localStorage.getItem("auth") === null){
+                    window.localStorage.setItem("auth", chargeUtile);
+                }else{
+                    window.localStorage.removeItem("auth");
+                    window.localStorage.setItem("auth", chargeUtile);
+                }    
             } else {
                 console.log('Erreur de connexion');
             }
