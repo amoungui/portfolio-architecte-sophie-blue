@@ -10,7 +10,7 @@ function ajoutListenerLogin() {
         };
         // Création de la charge utile au format JSON
         const chargeUtile = JSON.stringify(login); 
- 
+        console.log(chargeUtile)
         // Appel de la fonction fetch avec toutes les informations nécessaires
         fetch("http://127.0.0.1:5500/users/login", {
             method: "POST",
@@ -28,7 +28,8 @@ function ajoutListenerLogin() {
             if (contentType && contentType.includes('application/json')) {
                 return response.json();
             } else {
-                throw new Error('La réponse du serveur n\'est pas un JSON valide');
+                console.log(response)
+                // throw new Error('La réponse du serveur n\'est pas un JSON valide');
             }
         })
         .then(data => {
