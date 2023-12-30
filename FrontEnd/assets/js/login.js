@@ -12,14 +12,14 @@ function ajoutListenerLogin() {
         const chargeUtile = JSON.stringify(login); 
         console.log(chargeUtile)
         // Appel de la fonction fetch avec toutes les informations nécessaires
-        fetch("http://127.0.0.1:5500/users/login", {
+        fetch("http://127.0.0.1:5678/api/users/login/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: chargeUtile
         })
         .then(response => {
             if(response.status === 200) {
-                // window.location.href = "/home"; // Redirige vers la page d'accueil
+                window.location.href = "/home"; // Redirige vers la page d'accueil
                 console.log(response.status)
             } else {
                 console.log('Erreur de connexion');
