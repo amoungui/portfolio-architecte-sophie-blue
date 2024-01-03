@@ -125,7 +125,36 @@ if(localStorage.getItem("auth")){
     
     // Supprimer la classe 'logout_hidden' lorsque la variable 'auth' existe
     logout_value.classList.remove("logout_hidden"); 
-    
+    // Ajouter la classe 'logout' lorsque la variable 'auth' existe
+    login_value.classList.add("logout");
+
     // Ajouter la classe 'login_hidden' lorsque la variable 'auth' existe
     login_value.classList.add("login_hidden");
 }
+
+// Fonction pour vérifier l'état de connexion
+function checkLoginStatus() {
+    const login_value = document.querySelector(".login");
+    const logout_value = document.querySelector(".logout");
+
+    if(localStorage.getItem("auth")) {
+        // Si l'utilisateur est connecté
+        logout_value.classList.remove("logout_hidden");
+        login_value.classList.add("login_hidden");
+    } else {
+        // Si l'utilisateur n'est pas connecté
+        login_value.classList.remove("login_hidden");
+        logout_value.classList.add("logout_hidden");
+    }
+}
+
+// Appeler la fonction chaque fois que la page est chargée
+window.onload = checkLoginStatus;
+
+// Ajouter un écouteur d'événements pour le bouton de déconnexion
+const logout = document.querySelector(".logout");
+logout.addEventListener("click", function (event) {
+    event.preventDefault();
+    localStorage.removeItem("auth");
+    checkLoginStatus();
+});
