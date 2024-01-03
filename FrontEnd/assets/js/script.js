@@ -116,3 +116,16 @@ async function defaultData(data) {
     }
     return sectionWorks
 }  
+
+// Récupérer le localStorage
+if(localStorage.getItem("auth")){
+    // Récupération de l'élément du DOM qui accueillera les travaux
+    const login_value = document.querySelector(".login");
+    const logout_value = document.querySelector(".logout_hidden");
+    
+    // Supprimer la classe 'logout_hidden' lorsque la variable 'auth' existe
+    logout_value.classList.remove("logout_hidden"); 
+    
+    // Ajouter la classe 'login_hidden' lorsque la variable 'auth' existe
+    login_value.classList.add("login_hidden");
+}

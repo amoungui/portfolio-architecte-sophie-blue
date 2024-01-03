@@ -108,6 +108,18 @@ a:hover {
 	color: #B1663C;
 }
 
+.logout {
+	display: none;
+}
+
+.logout_hidden {
+    display: none;
+}
+
+.login_hidden {
+    display: none;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
