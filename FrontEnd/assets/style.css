@@ -156,6 +156,10 @@ a:hover {
 }
 
 .edit_project a {
+	width: 58px;
+	height: 16px;
+	top: 737px;
+	left: 872px;	
 	text-decoration: none;
 	font-family: Work Sans;
 	font-size: 14px;
