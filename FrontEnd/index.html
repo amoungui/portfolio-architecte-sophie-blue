@@ -11,7 +11,7 @@
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">	
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 <header>
@@ -42,8 +42,7 @@
 		<div class="edit_project">
 			<h2>Mes Projets</h2>
 			<div class="popup_edit">
-				<i class="fa-xs fa-solid fa-edit"></i>
-				<a href="#modal">modifier</a>
+				<a href="#modal1" class="js-modal"><i class="fa-xs fa-solid fa-edit"></i> modifier</a>
 			</div>
 		</div>
 		<div class="navigation">
@@ -78,6 +77,7 @@
 		</ul>
 	</nav>
 </footer>
+
 <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
 	<div class="modal-wrapper js-modal-stop">
 		<form action="#" method="post">
@@ -88,5 +88,6 @@
 </aside>
 
 <script src="assets/js/script.js"></script>
+<script src="assets/js/modal.js"></script>
 </body>
 </html>
