@@ -99,8 +99,11 @@ li:hover {
 	color: #B1663C;
 }
 
-nav a {
+a{
 	text-decoration: none;
+}
+
+nav a {
 	color: #000000;
 }
 
@@ -367,4 +370,17 @@ margin: auto;
 @keyframes slideToBottom {
     from { transform: translateY(0px); }
     to {  transform: translateY(50px); }
+}
+
+/* style de la première fenêtre modale d'édition des produits */
+modal-wrapper a {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	cursor: pointer;
 }
