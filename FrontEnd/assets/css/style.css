@@ -373,12 +373,13 @@ margin: auto;
 }
 
 /* style de la première fenêtre modale d'édition des produits */
-modal-wrapper a {
+.modal-wrapper a {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin : 5em auto ;
+	padding: 2%;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
