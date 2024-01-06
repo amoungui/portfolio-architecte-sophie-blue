@@ -158,3 +158,43 @@ logout.addEventListener("click", function (event) {
     localStorage.removeItem("auth");
     checkLoginStatus();
 });
+
+// implementation de la fenêtre modal
+document.addEventListener("DOMContentLoaded", function() {
+    // Récupération de l'élément du DOM qui accueillera les travaux
+    const listOfWorks = document.querySelector(".modal_gallery");
+    // Récupération des travaux depuis l'API
+    const _works = fetch('http://localhost:5678/api/works')
+        .then(response => response.json())
+        .then(data => {
+            console.log('data', data);
+            modalData(data);
+        });
+
+    async function modalData(data) {
+        for (let i = 0; i < data.length; i++) {
+            // Récupération de l'élément du DOM qui accueillera les travaux
+            const sectionWorks = document.querySelector(".modal_gallery");
+            // Création d’une balise dédiée à un travail
+            const workElement = document.createElement("figure");
+            // On crée l’élément img.
+            const imageElement = document.createElement("img");
+            // On accède à l’indice i de la liste destravaux pour configurer la source de l’image.
+            imageElement.src = data[i].imageUrl;
+            // Définir la largeur et la hauteur de l'image
+            imageElement.style.width = "76.86px";
+            imageElement.style.height = "102.57px";
+            // Idem pour le nom ... 
+            const figcaptionElement = document.createElement("figcaption");
+            //figcaptionElement.innerHTML = data[i].title;
+            // Définir le style de la légende
+            figcaptionElement.style.fontSize = "14px"; // Par exemple
+            // On rattache la balise figure à la section gallery
+            sectionWorks.appendChild(workElement);
+            // On rattache l’image à workElement
+            workElement.appendChild(imageElement);
+            workElement.appendChild(figcaptionElement);
+        }
+        return sectionWorks
+    }
+});
