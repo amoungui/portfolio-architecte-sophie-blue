@@ -145,6 +145,7 @@ function checkLoginStatus() {
         // Si l'utilisateur n'est pas connecté
         login_value.classList.remove("login_hidden");
         logout_value.classList.add("logout_hidden");
+        localStorage.removeItem("auth");
     }
 }
 
