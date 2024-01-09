@@ -472,13 +472,21 @@ margin: auto;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
+	background-color: #A7A7A7;
 	margin : 0.5em auto ;
 	width: 237px;
+	height: 36px;
 	text-align: center;
 	border-radius: 60px ;
-	cursor: pointer;
+	cursor: pointer;	
 }
+
+.form-img hr {
+    border: none;
+    border-top: 1px solid #000; /* Changez la couleur en fonction de votre design */
+    margin: 15px 0; /* Ajoutez de l'espace au-dessus et en dessous de la ligne */
+}
+
 .container-load .logo-load {
 	font-size: 50px;
 	background-color: #B9C5CC;
