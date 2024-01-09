@@ -405,7 +405,7 @@ margin: auto;
 	justify-content: center;
 	align-items: center;
 	height: 100%; /* Assurez-vous que le conteneur est suffisamment grand */
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 .wrapper-content {
@@ -465,7 +465,7 @@ margin: auto;
 }
 
 .form-img label {
-	margin: 1em 0 1em 0;
+	margin: 0.5em 0 0.5em 0;
 }
 
 .form-img input[type="submit"]{
@@ -473,7 +473,7 @@ margin: auto;
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin : 1em auto ;
 	width: 237px;
 	text-align: center;
 	border-radius: 60px ;
@@ -488,5 +488,4 @@ margin: auto;
 	border-left: 5px solid #B9C5CC;
 	border-right: 5px solid #B9C5CC;
 	border-radius: 5px;
-	padding: 9.5px, 3.93px, 6.88px, 3.93px;
 }
