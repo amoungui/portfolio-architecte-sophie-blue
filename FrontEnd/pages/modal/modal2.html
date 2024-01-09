@@ -10,17 +10,25 @@
 <body>
     <aside id="modal2" class="modal" role="dialog" aria-labelledby="titlemodal">
         <div class="modal-wrapper js-modal-stop">
+            <div class="wrapper-nav">
+                <a href="#modal1" class="js-modal"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="#" class="js-modal-close"><i class="fa-solid fa-xmark"></i></a>
+            </div>
             <div class="wrapper-content">
-                <div class="wrapper-nav">
-                    <a hef="#" ><i class="fa-solid fa-arrow-left"></i></a>
-                    <a href="#" class="js-modal-close"><i class="fa-solid fa-xmark"></i></a>
-                </div>
                 <div class="content-title">
                     <h2>Ajout photo</h2>
                 </div>
-                <div class="modal_gallery">
-                    
+                <div class="content-container">
+                    <i class="fa-solid fa-light fa-image"></i>
+                    <input type="file" id="imageUpload" name="imageUpload" accept=".jpg, .png" class="input-file">
+                    <label for="imageUpload" class="input-label">+ Ajouter photo</label>
+                    <p class="file-types">jpg, png : 4mo max</p>
                 </div>
+                <form method="post" class="form-img">
+                    <input type="text" name="title" id="title" placeholder="Titre">
+                    <input type="text" name="category" id="category" placeholder="Catégorie">
+                    <input type="submit" value="Valider">
+                </form>
             </div>
             <hr><br>
             <div class="wrapper-link">
@@ -28,6 +36,24 @@
             </div>
         </div>
     </aside>
+    <aside id="modal2" class="modal" role="dialog" aria-labelledby="titlemodal">
+        <div class="modal-wrapper js-modal-stop">
+            <div class="wrapper-content">
+                <div class="content-container">
+                    <div class="logo"></div>
+                    <input type="file" id="imageUpload" name="imageUpload" accept=".jpg, .png" class="input-file">
+                    <label for="imageUpload" class="input-label">+ Ajouter photo</label>
+                    <p class="file-types">jpg, png : 4mo max</p>
+                </div>
+                <form method="post" class="form-img">
+                    <input type="text" name="title" id="title" placeholder="Titre">
+                    <input type="text" name="category" id="category" placeholder="Catégorie">
+                    <input type="submit" value="Valider">
+                </form>
+            </div>
+        </div>
+    </aside>
+    
 <script src="../../assets/js/modal.js"></script>
 </body>
 </html>

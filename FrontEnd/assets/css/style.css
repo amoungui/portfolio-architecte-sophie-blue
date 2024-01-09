@@ -405,3 +405,7 @@ margin: auto;
 	height: 100%; /* Assurez-vous que le conteneur est suffisamment grand */
 }
 
+.wrapper-content {
+	margin: auto;
+	width: 420px;
+}
