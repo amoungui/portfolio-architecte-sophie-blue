@@ -390,3 +390,18 @@ margin: auto;
 	border-radius: 60px;
 	cursor: pointer;
 }
+/* style pour la deuxième fenêtre modal */
+.wrapper-nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.wrapper-content .content-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%; /* Assurez-vous que le conteneur est suffisamment grand */
+}
+
