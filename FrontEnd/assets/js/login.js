@@ -24,8 +24,9 @@ function ajoutListenerLogin() {
                 // Stockage des informations dans le localStorage
                 if (window.localStorage.getItem("auth") === null){
                     window.localStorage.setItem("auth", chargeUtile);
+                    window.localStorage.setItem("token", response.body)
                 }else{
-                    window.localStorage.removeItem("auth");
+                    window.localStorage.clear();
                     window.localStorage.setItem("auth", chargeUtile);
                 }    
             } else {

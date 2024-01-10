@@ -117,25 +117,10 @@ async function defaultData(data) {
     return sectionWorks
 }  
 
-// Récupérer le localStorage
-if(localStorage.getItem("auth")){
-    // Récupération de l'élément du DOM qui accueillera les travaux
-    const login_value = document.querySelector(".login");
-    const logout_value = document.querySelector(".logout_hidden");
-    
-    // Supprimer la classe 'logout_hidden' lorsque la variable 'auth' existe
-    logout_value.classList.remove("logout_hidden"); 
-    // Ajouter la classe 'logout' lorsque la variable 'auth' existe
-    login_value.classList.add("logout");
-
-    // Ajouter la classe 'login_hidden' lorsque la variable 'auth' existe
-    login_value.classList.add("login_hidden");
-}
-
 // Fonction pour vérifier l'état de connexion
 function checkLoginStatus() {
-    const login_value = document.querySelector(".login");
-    const logout_value = document.querySelector(".logout");
+    const login_value = document.querySelector(".nav_menu.login");
+    const logout_value = document.querySelector(".nav_menu.logout_hidden");
 
     if(localStorage.getItem("auth")) {
         // Si l'utilisateur est connecté
@@ -145,7 +130,6 @@ function checkLoginStatus() {
         // Si l'utilisateur n'est pas connecté
         login_value.classList.remove("login_hidden");
         logout_value.classList.add("logout_hidden");
-        localStorage.removeItem("auth");
     }
 }
 
@@ -153,11 +137,13 @@ function checkLoginStatus() {
 window.onload = checkLoginStatus;
 
 // Ajouter un écouteur d'événements pour le bouton de déconnexion
-const logout = document.querySelector(".logout");
+const logout = document.querySelector(".nav_menu.logout_hidden");
 logout.addEventListener("click", function (event) {
-    event.preventDefault();
-    localStorage.removeItem("auth");
+    // event.preventDefault();
+    // event.stopPropagation(); // Empêche la propagation de l'événement
+    localStorage.clear();
     checkLoginStatus();
+    window.location.href = "/FrontEnd/"; // Redirige vers la page d'accueil
 });
 
 // implementation de la fenêtre modal
