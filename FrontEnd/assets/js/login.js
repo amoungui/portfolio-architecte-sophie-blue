@@ -19,7 +19,7 @@ function ajoutListenerLogin() {
         })
         .then(response => {
             if(response.status === 200) {
-                window.location.href = "/FrontEnd/"; // Redirige vers la page d'accueil
+                window.location.href = "../index.html"; // Redirige vers la page d'accueil
                 console.log(response.status)
                 // Stockage des informations dans le localStorage
                 if (window.localStorage.getItem("auth") === null){
