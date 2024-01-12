@@ -143,7 +143,7 @@ logout.addEventListener("click", function (event) {
     // event.stopPropagation(); // Empêche la propagation de l'événement
     localStorage.clear();
     checkLoginStatus();
-    window.location.href = "/FrontEnd/"; // Redirige vers la page d'accueil
+    window.location.href = "../index.html"; // Redirige vers la page d'accueil
 });
 
 // implementation de la fenêtre modal
