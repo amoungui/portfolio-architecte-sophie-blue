@@ -105,7 +105,7 @@ async function checkCategoryStatus(categorie){
 }
 
 // Ajouter un écouteur d'événements pour le bouton de d'ajout de travaux
-const formulairemodale = document.querySelector(".formulaire-modale");
+const formulairemodale = document.querySelector(".form-img");
 formulairemodale.addEventListener("submit", async function (event) {
     event.preventDefault();
     // vérifions que tous les champs du formulaire sont remplis
