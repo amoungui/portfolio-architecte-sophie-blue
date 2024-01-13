@@ -164,24 +164,29 @@ document.addEventListener("DOMContentLoaded", function() {
             const sectionWorks = document.querySelector(".modal_gallery");
             // Création d’une balise dédiée à un travail
             const workElement = document.createElement("figure");
+            workElement.classList.add('work-element'); // Ajout d'une classe pour le style CSS
+    
             // On crée l’élément img.
             const imageElement = document.createElement("img");
-            // On accède à l’indice i de la liste destravaux pour configurer la source de l’image.
             imageElement.src = data[i].imageUrl;
-            // Définir la largeur et la hauteur de l'image
             imageElement.style.width = "76.86px";
             imageElement.style.height = "102.57px";
+    
+            // Création de l'icône de la corbeille
+            const trashIcon = document.createElement("i");
+            trashIcon.classList.add('fa-regular', 'fa-trash-can', 'trash-icon'); // Ajout des classes pour l'icône
+    
             // Idem pour le nom ... 
             const figcaptionElement = document.createElement("figcaption");
-            //figcaptionElement.innerHTML = data[i].title;
-            // Définir le style de la légende
             figcaptionElement.style.fontSize = "14px"; // Par exemple
+    
             // On rattache la balise figure à la section gallery
             sectionWorks.appendChild(workElement);
-            // On rattache l’image à workElement
+            // On rattache l’image et l'icône à workElement
             workElement.appendChild(imageElement);
+            workElement.appendChild(trashIcon);
             workElement.appendChild(figcaptionElement);
         }
         return sectionWorks
-    }
+    }        
 });

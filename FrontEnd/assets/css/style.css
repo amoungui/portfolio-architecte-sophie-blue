@@ -497,3 +497,30 @@ margin: auto;
 	border-right: 5px solid #B9C5CC;
 	border-radius: 5px;
 }
+
+.work-element {
+    position: relative; /* Permet de positionner les enfants en absolu par rapport à cet élément */
+    width: calc(100% / 5); /* Divise l'espace disponible en 5 colonnes */
+}
+
+.trash-icon {
+    position: absolute; /* Positionne l'icône en absolu par rapport à workElement */
+    top: 0; /* Positionne l'icône en haut */
+    left: 0; /* Positionne l'icône à gauche */
+	padding: 15%;
+	background-color: #000;
+	color: white;
+	margin-left: 370%;
+	margin-top: 50%;
+}
+
+.modal_gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px; /* Ajustez l'espacement entre les images si nécessaire */
+}
+
+.modal_gallery img {
+    width: 100%;
+    height: auto;
+}
