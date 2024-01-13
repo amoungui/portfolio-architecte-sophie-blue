@@ -526,11 +526,11 @@ margin: auto;
     height: auto;
 }
 
-/* style for icon close of modal */
+/* style pour l'icon close de la fenêtre modale 1 */
 .closed {
 	margin-left: 95%;
 }
-/* style for modal1 title */
+/* style pour le titre de la fenêtre modale & */
 .modal1-title{
 	padding: 3%;
 }

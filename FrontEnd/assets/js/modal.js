@@ -89,3 +89,11 @@ window.addEventListener('keydown', function (e) {
         focusInModal(e)
     }
 })
+
+/* script d'ajout des données sur un travail au travers de l'api */
+// vérifions que tous les champs du formulaire sont remplis
+
+// si tous les champs du formulaire sont remplis alors activons 
+// le bouton de soumission du formulaire de la fenêtre modale 2
+
+// lançons l'insertion des données via l'api
