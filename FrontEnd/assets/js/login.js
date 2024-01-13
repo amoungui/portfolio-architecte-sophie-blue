@@ -3,7 +3,7 @@ function ajoutListenerLogin() {
     formulaireLogin.addEventListener("submit", function (event) {
         // Désactivation du comportement par défaut du navigateur
         event.preventDefault();
-        // Création de l’objet du nouvel avis.
+        // Création de l’objet de connexion.
         const login = {
             email: event.target.querySelector("[name=email]").value,
             password: event.target.querySelector("[name=password]").value,
