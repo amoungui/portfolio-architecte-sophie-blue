@@ -498,6 +498,7 @@ margin: auto;
 	border-radius: 5px;
 }
 
+/* style pour la fenêtre modal1 */
 .work-element {
     position: relative; /* Permet de positionner les enfants en absolu par rapport à cet élément */
     width: calc(100% / 5); /* Divise l'espace disponible en 5 colonnes */
@@ -523,4 +524,13 @@ margin: auto;
 .modal_gallery img {
     width: 100%;
     height: auto;
+}
+
+/* style for icon close of modal */
+.closed {
+	margin-left: 95%;
+}
+/* style for modal1 title */
+.modal1-title{
+	padding: 3%;
 }
