@@ -1,5 +1,21 @@
+// fonction qui vérifie si la catégorie saisie existe dans la liste des
+// catégories de l'api
+async function checkCategoryStatus(categorie){
+    // Récupération des travaux depuis l'API
+    const response = await fetch('http://localhost:5678/api/categories');
+    const categories = await response.json();
+    for (let i = 0; i < categories.length; i++) {
+        if (categorie === categories[i].name){
+            return categories[i].id;
+        }
+    }
+    return null;
+}
+
 const formulairemodale = document.querySelector(".form-img");
 const notification = document.querySelector("#notification");
+console.log(formulairemodale);
+console.log(notification);
 
 formulairemodale.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -7,7 +23,7 @@ formulairemodale.addEventListener("submit", async function (event) {
     if (
         event.target.querySelector("[name=title]").value !== "" && 
         event.target.querySelector("[name=category]").value !== "" &&
-        event.target.querySelector("[name=imageUpload]").value !== ""
+        event.target.querySelector("[name=imageUpload]").files.length > 0
     ){
         let categorie = event.target.querySelector("[name=category]").value;
         let categoryId = await checkCategoryStatus(categorie);
@@ -16,7 +32,7 @@ formulairemodale.addEventListener("submit", async function (event) {
             const work = {
                 title: event.target.querySelector("[name=title]").value,
                 categoryId: categoryId,
-                imageUrl: event.target.querySelector("[name=imageUpload]").value,
+                imageUrl: URL.createObjectURL(event.target.querySelector("[name=imageUpload]").files[0]),
                 userId: 1 // Comme nous avons mentionné que l'utilisateur connecté est unique et a l'id 1
             };
             // Création de la charge utile au format JSON

@@ -98,17 +98,3 @@ window.addEventListener('keydown', function (e) {
         focusInModal(e)
     }
 })
-
-// fonction qui vérifie si la catégorie saisie existe dans la liste des
-// catégories de l'api
-async function checkCategoryStatus(categorie){
-    // Récupération des travaux depuis l'API
-    const response = await fetch('http://localhost:5678/api/categories');
-    const categories = await response.json();
-    for (let i = 0; i < categories.length; i++) {
-        if (categorie === categories[i].name){
-            return categories[i].id;
-        }
-    }
-    return null;
-}
