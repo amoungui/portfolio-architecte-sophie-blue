@@ -1,6 +1,6 @@
-
-// Ajouter un écouteur d'événements pour le bouton de d'ajout de travaux
 const formulairemodale = document.querySelector(".form-img");
+const notification = document.querySelector("#notification");
+
 formulairemodale.addEventListener("submit", async function (event) {
     event.preventDefault();
     // vérifions que tous les champs du formulaire sont remplis
@@ -23,13 +23,22 @@ formulairemodale.addEventListener("submit", async function (event) {
             const chargeUtile = JSON.stringify(work); 
             console.log(chargeUtile)
             // Appel de la fonction fetch avec toutes les informations nécessaires
-            await fetch("http://localhost:5678/api/works", {
+            const response = await fetch("http://localhost:5678/api/works", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: chargeUtile
             })
+            if (response.ok) {
+                notification.textContent = "L'insertion des données a réussi !";
+                notification.style.color = "green";
+            } else {
+                notification.textContent = "L'insertion des données a échoué.";
+                notification.style.color = "red";
+            }
         } else {
             console.log("La catégorie saisie n'existe pas.");
+            notification.textContent = "La catégorie saisie n'existe pas.";
+            notification.style.color = "red";
         }
     }    
     window.location.href = "../index.html"; // Redirige vers la page d'accueil
