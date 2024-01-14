@@ -44,6 +44,15 @@ const closeModal = function (e) {
     modal.addEventListener('animationend', hideModal)
 }
 
+document.querySelector('.modal_submit').addEventListener('click', function() {
+    document.getElementById('modal1').style.display = 'none';
+});
+
+document.querySelector('.js-modal').addEventListener('click', function(event) {
+    event.stopPropagation();
+    document.getElementById('modal1').style.display = 'block';
+});
+
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
