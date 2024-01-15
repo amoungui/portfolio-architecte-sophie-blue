@@ -534,3 +534,6 @@ margin: auto;
 .modal1-title{
 	padding: 3%;
 }
+.link-icon {
+	cursor: pointer;
+}

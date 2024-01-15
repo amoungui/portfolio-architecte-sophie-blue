@@ -146,11 +146,8 @@ logout.addEventListener("click", function (event) {
     window.location.href = "../index.html"; // Redirige vers la page d'accueil
 });
 
-// implementation de la fenêtre modal
 document.addEventListener("DOMContentLoaded", function() {
-    // Récupération de l'élément du DOM qui accueillera les travaux
     const listOfWorks = document.querySelector(".modal_gallery");
-    // Récupération des travaux depuis l'API
     const _works = fetch('http://localhost:5678/api/works')
         .then(response => response.json())
         .then(data => {
@@ -159,34 +156,31 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
     async function modalData(data) {
-        for (let i = 0; i < data.length; i++) {
-            // Récupération de l'élément du DOM qui accueillera les travaux
+        data.forEach((item, i) => {
             const sectionWorks = document.querySelector(".modal_gallery");
-            // Création d’une balise dédiée à un travail
             const workElement = document.createElement("figure");
-            workElement.classList.add('work-element'); // Ajout d'une classe pour le style CSS
-    
-            // On crée l’élément img.
+            workElement.classList.add('work-element');
+
             const imageElement = document.createElement("img");
-            imageElement.src = data[i].imageUrl;
+            imageElement.src = item.imageUrl;
             imageElement.style.width = "76.86px";
             imageElement.style.height = "102.57px";
-    
-            // Création de l'icône de la corbeille
+
             const trashIcon = document.createElement("i");
-            trashIcon.classList.add('fa-regular', 'fa-trash-can', 'trash-icon'); // Ajout des classes pour l'icône
-    
-            // Idem pour le nom ... 
+            trashIcon.classList.add('fa-regular', 'fa-trash-can', 'trash-icon');
+
+            const linkIcon = document.createElement("a");
+            linkIcon.classList.add('link-icon');
+            linkIcon.appendChild(trashIcon);
+
             const figcaptionElement = document.createElement("figcaption");
-            figcaptionElement.style.fontSize = "14px"; // Par exemple
-    
-            // On rattache la balise figure à la section gallery
+            figcaptionElement.style.fontSize = "14px";
+
             sectionWorks.appendChild(workElement);
-            // On rattache l’image et l'icône à workElement
             workElement.appendChild(imageElement);
-            workElement.appendChild(trashIcon);
+            workElement.appendChild(linkIcon);
             workElement.appendChild(figcaptionElement);
-        }
+        });
         return sectionWorks
     }        
 });
