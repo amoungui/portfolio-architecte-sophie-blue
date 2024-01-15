@@ -193,10 +193,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }        
 });
 
-function deleteImage(id) {
-    console.log(id);
-    fetch(`http://localhost:5678/api/works/${id}`, {
+function deleteImage(item) {
+    console.log(item);
+    token = window.localStorage.getItem("token")
+    fetch(`http://localhost:5678/api/works/${item.id}`, {
         method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
     })
     .then(response => response.json())
     .then(data => {

@@ -23,8 +23,8 @@ function ajoutListenerLogin() {
                 console.log(response.status)
                 // Stockage des informations dans le localStorage
                 if (window.localStorage.getItem("auth") === null){
-                    window.localStorage.setItem("auth", chargeUtile);
                     window.localStorage.setItem("token", response.body)
+                    window.localStorage.setItem("auth", chargeUtile);
                 }else{
                     window.localStorage.clear();
                     window.localStorage.setItem("auth", chargeUtile);
