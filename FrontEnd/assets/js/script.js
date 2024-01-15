@@ -121,14 +121,17 @@ async function defaultData(data) {
 function checkLoginStatus() {
     const login_value = document.querySelector(".nav_menu.login");
     const logout_value = document.querySelector(".nav_menu.logout_hidden");
-
+    const modify_action = document.querySelector(".js-modal.modify_action");
+    
     if(localStorage.getItem("auth")) {
         // Si l'utilisateur est connecté
         logout_value.classList.remove("logout_hidden");
+        modify_action.classList.remove("modify_hidden");
         login_value.classList.add("login_hidden");
     } else {
         // Si l'utilisateur n'est pas connecté
         login_value.classList.remove("login_hidden");
+        modify_action.classList.add("modify_hidden");
         logout_value.classList.add("logout_hidden");
     }
 }
@@ -173,6 +176,11 @@ document.addEventListener("DOMContentLoaded", function() {
             linkIcon.classList.add('link-icon');
             linkIcon.appendChild(trashIcon);
 
+            linkIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                deleteImage(item);
+            });
+
             const figcaptionElement = document.createElement("figcaption");
             figcaptionElement.style.fontSize = "14px";
 
@@ -184,3 +192,17 @@ document.addEventListener("DOMContentLoaded", function() {
         return sectionWorks
     }        
 });
+
+function deleteImage(id) {
+    console.log(id);
+    fetch(`http://localhost:5678/api/works/${id}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}

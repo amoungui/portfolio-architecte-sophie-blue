@@ -537,3 +537,7 @@ margin: auto;
 .link-icon {
 	cursor: pointer;
 }
+
+.modify_hidden{
+	display: none;
+}
