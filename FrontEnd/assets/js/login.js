@@ -9,7 +9,7 @@ function ajoutListenerLogin() {
             password: event.target.querySelector("[name=password]").value,
         };
         // Création de la charge utile au format JSON
-        const chargeUtile = JSON.stringify(login); 
+        const chargeUtile = JSON.stringify(login);
         console.log(chargeUtile)
         // Appel de la fonction fetch avec toutes les informations nécessaires
         fetch("http://127.0.0.1:5678/api/users/login/", {
@@ -17,36 +17,20 @@ function ajoutListenerLogin() {
             headers: { "Content-Type": "application/json" },
             body: chargeUtile
         })
-        .then(response => {
-            if(response.status === 200) {
+        .then(response => response.json())
+        .then(data => {
+            if(data.token) {
+                window.localStorage.setItem("token", data.token);
+                window.localStorage.setItem("auth", chargeUtile);
                 window.location.href = "../index.html"; // Redirige vers la page d'accueil
-                console.log(response.status)
-                // Stockage des informations dans le localStorage
-                if (window.localStorage.getItem("auth") === null){
-                    window.localStorage.setItem("token", response.body)
-                    window.localStorage.setItem("auth", chargeUtile);
-                }else{
-                    window.localStorage.clear();
-                    window.localStorage.setItem("auth", chargeUtile);
-                }    
             } else {
                 console.log('Erreur de connexion');
             }
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-                return response.json();
-            } else {
-                console.log(response)
-                throw new Error('La réponse du serveur n\'est pas un JSON valide');
-            }
-        })
-        .then(data => {
-            console.log(data);
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des données :', error);
-        });               
+        });
     });
 }
 
-ajoutListenerLogin()
+ajoutListenerLogin();
