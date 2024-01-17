@@ -32,9 +32,10 @@ formulairemodale.addEventListener("submit", async function (event) {
             const work = {
                 title: event.target.querySelector("[name=title]").value,
                 categoryId: categoryId,
-                imageUrl: URL.createObjectURL(event.target.querySelector("[name=imageUpload]").files[0]),
-                userId: 1 // Comme nous avons mentionné que l'utilisateur connecté est unique et a l'id 1
+                imageUrl: URL.createObjectURL(event.target.querySelector("[name=imageUpload]").files[0])
+                //userId: 1 // Comme nous avons mentionné que l'utilisateur connecté est unique et a l'id 1
             };
+            console.log(work);
             // Création de la charge utile au format JSON
             const chargeUtile = JSON.stringify(work); 
             console.log(chargeUtile)
