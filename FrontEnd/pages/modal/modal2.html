@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sophie Bluel - Architecte d'intérieur</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/modal_insert.js"></script>
 </head>
 <body>
     <aside id="modal2" class="modal" role="dialog" aria-labelledby="titlemodal">
         <div class="modal-wrapper js-modal-stop">
             <div class="wrapper-nav">
-                <a href="../../FrontEnd/index.html#modal1" class="js-modal"><i class="fa-solid fa-arrow-left arow-link"></i></a>
+                <a href="../../FrontEnd/index.html" class="js-modal"><i class="fa-solid fa-arrow-left arow-link"></i></a>
                 <a href="#" class="js-modal-close"><i class="fa-solid fa-xmark"></i></a>
             </div>
             <div class="wrapper-content">
@@ -19,7 +20,7 @@
                     <h2>Ajout photo</h2>
                 </div>
                 <div id="notification"></div>
-                <form action="#" method="post" class="form-img">
+                <form action="#" method="post" class="form-img formulaire-work">
                     <div class="container-load">
                         <i class="fa-solid fa-light fa-image logo-load"></i>
                         <input type="file" id="imageUpload" name="imageUpload" accept=".jpg, .png" class="input-file">
@@ -28,8 +29,12 @@
                     </div>
                     <label for="name">Titre</label>
                     <input type="text" name="title" id="title">
-                    <label for="email">Catégorie</label>
-                    <input type="text" name="category" id="category">
+                    <label for="category">Catégorie</label>
+                    <select name="category" id="category">
+                        <option value="Objets">Objets</option>
+                        <option value="appartements">Appartements</option>
+                        <option value="Hôtels&restaurants">Hôtels & Restaurants</option>
+                    </select>                    
                     <hr>
                     <input type="submit" value="Valider" >
                 </form>                
@@ -38,6 +43,5 @@
     </aside>    
     <script src="../../assets/js/script.js"></script>
     <script src="../../assets/js/modal.js"></script>
-    <script src="../../assets/js/modal_insert.js"></script>
 </body>
 </html>

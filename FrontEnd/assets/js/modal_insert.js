@@ -12,51 +12,44 @@ async function checkCategoryStatus(categorie){
     return null;
 }
 
-const formulairemodale = document.querySelector(".form-img");
-const notification = document.querySelector("#notification");
-console.log(formulairemodale);
-console.log(notification);
-
-formulairemodale.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    // vérifions que tous les champs du formulaire sont remplis
-    if (
-        event.target.querySelector("[name=title]").value !== "" && 
-        event.target.querySelector("[name=category]").value !== "" &&
-        event.target.querySelector("[name=imageUpload]").files.length > 0
-    ){
+function ajoutListenerData() {
+    const formulaireLogin = document.querySelector(".formulaire-work");
+    formulaireLogin.addEventListener("submit", function (event) {
+        // Désactivation du comportement par défaut du navigateur
+        event.preventDefault();
         let categorie = event.target.querySelector("[name=category]").value;
-        let categoryId = await checkCategoryStatus(categorie);
-        if (categoryId !== null){
-            // Création de l’objet du nouvel travail.
-            const work = {
-                title: event.target.querySelector("[name=title]").value,
-                categoryId: categoryId,
-                imageUrl: URL.createObjectURL(event.target.querySelector("[name=imageUpload]").files[0])
-                //userId: 1 // Comme nous avons mentionné que l'utilisateur connecté est unique et a l'id 1
-            };
-            console.log(work);
-            // Création de la charge utile au format JSON
-            const chargeUtile = JSON.stringify(work); 
-            console.log(chargeUtile)
-            // Appel de la fonction fetch avec toutes les informations nécessaires
-            const response = await fetch("http://localhost:5678/api/works", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: chargeUtile
-            })
-            if (response.ok) {
-                notification.textContent = "L'insertion des données a réussi !";
-                notification.style.color = "green";
-            } else {
-                notification.textContent = "L'insertion des données a échoué.";
-                notification.style.color = "red";
-            }
-        } else {
-            console.log("La catégorie saisie n'existe pas.");
-            notification.textContent = "La catégorie saisie n'existe pas.";
-            notification.style.color = "red";
-        }
-    }    
-    window.location.href = "../index.html"; // Redirige vers la page d'accueil
-});
+        let categoryId = checkCategoryStatus(categorie);        
+        // Création de l’objet de connexion.
+        const work = {
+            email: event.target.querySelector("[name=imageUpload]").value,
+            title: event.target.querySelector("[name=title]").value,
+            categoryId: categoryId,
+        };
+        console.log(work);
+        // Création de la charge utile au format JSON
+        const chargeUtile = JSON.stringify(login);
+        console.log(chargeUtile);
+        // Récupérer le token du localStorage
+        const token = window.localStorage.getItem("token");
+
+        // Envoyer la requête à l'API
+        fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token  // Ajouter l'en-tête Authorization
+            },
+            body: chargeUtile
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'insertion des données :', error);
+        });
+    });
+}
+
+ajoutListenerData();
+
