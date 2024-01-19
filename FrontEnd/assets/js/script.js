@@ -121,7 +121,7 @@ async function defaultData(data) {
 function checkLoginStatus() {
     const login_value = document.querySelector(".nav_menu.login");
     const logout_value = document.querySelector(".nav_menu.logout_hidden");
-    const modify_action = document.querySelector(".js-modal.modify_action");
+    const modify_action = document.querySelector(".js-modal1.modify_action");
     
     if(localStorage.getItem("auth")) {
         // Si l'utilisateur est connecté
