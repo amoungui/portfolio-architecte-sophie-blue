@@ -82,6 +82,39 @@ const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
+//Ajout de photo à la galerie
+// Récupération du formulaire
+const insertPhotoForm = document.getElementById("insert-photos");
 
+// Ajout de l'événement 'submit' au formulaire
+insertPhotoForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
+    // Création d'un objet FormData pour stocker les données du formulaire
+    const dataAjout = new FormData();
+    dataAjout.append("title", document.getElementById("title").value);
+    dataAjout.append("category", Number(document.getElementById("category").value));
+    dataAjout.append("image", document.getElementById("imageUpload").files[0]);
 
+    token = window.localStorage.getItem("token")
+
+    // Effectuer la requête POST
+    const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        body: dataAjout,
+    });
+
+    // Vérification de la réponse
+    if (!response.ok) {
+        const errorDetails = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, details: ${errorDetails}`);
+    } else {
+        // Si la requête a réussi, on peut réinitialiser le formulaire et fermer la modale
+        document.getElementById("title").value = "";
+        document.getElementById("category").value = "Objets";
+        document.getElementById("modal2").style.display = "none";
+    }
+});

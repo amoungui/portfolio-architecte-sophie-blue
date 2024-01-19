@@ -453,6 +453,13 @@ margin: auto;
 	cursor: pointer;	
 }
 
+.form-img select {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
 .form-img hr {
     border: none;
     border-top: 1px solid #B3B3B3; /* Changez la couleur en fonction de votre design */
@@ -510,6 +517,6 @@ margin: auto;
 	cursor: pointer;
 }
 
-/*.modify_hidden{
+.modify_hidden{
 	display: none;
-}*/
+}
