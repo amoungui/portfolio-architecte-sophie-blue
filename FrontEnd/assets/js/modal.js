@@ -86,15 +86,38 @@ const stopPropagation = function (e) {
 // Récupération du formulaire
 const insertPhotoForm = document.getElementById("insert-photos");
 
+// Récupération des éléments du formulaire
+const title = document.getElementById("title");
+const category = document.getElementById("category");
+const imageUpload = document.getElementById("imageUpload");
+const submitButton = document.querySelector(".insert-work");
+
+// Fonction pour vérifier si tous les champs sont remplis
+function checkForm() {
+    if (title.value && category.value && imageUpload.files.length > 0) {
+        console.log(submitButton);
+        submitButton.id = "btn-active-work";
+    } else {
+        submitButton.id = "";
+    }
+}
+
+// Ajout des écouteurs d'événements
+title.addEventListener("input", checkForm);
+category.addEventListener("change", checkForm);
+imageUpload.addEventListener("change", checkForm);
+
 // Ajout de l'événement 'submit' au formulaire
 insertPhotoForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-
-    // Création d'un objet FormData pour stocker les données du formulaire
     const dataAjout = new FormData();
-    dataAjout.append("title", document.getElementById("title").value);
-    dataAjout.append("category", Number(document.getElementById("category").value));
-    dataAjout.append("image", document.getElementById("imageUpload").files[0]);
+    if (title.value && category.value && imageUpload.files[0]) {
+        // Création d'un objet FormData pour stocker les données du formulaire
+        dataAjout.append("title", title.value);
+        dataAjout.append("category", Number(category.value));
+        dataAjout.append("image", imageUpload.files[0]);
+        submitButton.classList.add("btn-active-work"); // Utilisez submitButton ici
+    }
 
     token = window.localStorage.getItem("token")
     // Effectuer la requête POST
