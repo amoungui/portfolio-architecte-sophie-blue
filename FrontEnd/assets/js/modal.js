@@ -97,7 +97,6 @@ insertPhotoForm.addEventListener("submit", async (event) => {
     dataAjout.append("image", document.getElementById("imageUpload").files[0]);
 
     token = window.localStorage.getItem("token")
-
     // Effectuer la requête POST
     const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
