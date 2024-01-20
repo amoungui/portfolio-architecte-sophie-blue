@@ -122,17 +122,20 @@ function checkLoginStatus() {
     const login_value = document.querySelector(".nav_menu.login");
     const logout_value = document.querySelector(".nav_menu.logout_hidden");
     const modify_action = document.querySelector(".js-modal1.modify_action");
+    const js_edition = document.querySelector(".js-edition.mask_barre_hidden");
     
     if(localStorage.getItem("auth")) {
         // Si l'utilisateur est connecté
         logout_value.classList.remove("logout_hidden");
         modify_action.classList.remove("modify_hidden");
+        js_edition.classList.remove("mask_barre_hidden");
         login_value.classList.add("login_hidden");
     } else {
         // Si l'utilisateur n'est pas connecté
         login_value.classList.remove("login_hidden");
         modify_action.classList.add("modify_hidden");
         logout_value.classList.add("logout_hidden");
+        js_edition.classList.add("mask_barre_hidden");
     }
 }
 
@@ -211,3 +214,5 @@ function deleteImage(item) {
         console.error('Error:', error);
     });
 }
+
+// affichage de la barre admin

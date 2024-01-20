@@ -523,15 +523,11 @@ margin: auto;
 
 /* barre noir */
 /* barre noir Admin*/
-/* barre noir Admin*/
-#maskBarre {
+.js-edition {
     background-color: #000000;
-    font-family: "Work Sans";
-    font-style: normal;
-    font-weight: 400;
+    font-family: "Work Sans";;
     font-size: 16px;
     line-height: 19px;
-    color: #000000;
     text-align: center;
     display: flex;
     align-items: center;
@@ -542,7 +538,15 @@ margin: auto;
     padding: 0; /* Ajouté */
 }
 
-#maskBarre i {
+.js-edition i {
     color: #fff;
     margin-left: 10px;
+}
+
+.js-edition p {
+	color:#fff;
+}
+
+.mask_barre_hidden {
+	display: none;
 }
