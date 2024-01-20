@@ -214,5 +214,3 @@ function deleteImage(item) {
         console.error('Error:', error);
     });
 }
-
-// affichage de la barre admin
