@@ -46,7 +46,6 @@ const openModal2 = async function (e) {
     modal2.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
-// fonction permettant de fermer la première modale
 // fonction permettant de fermer la deuxième modale
 const closeModal2 = function (e) {
     if (modal2 === null) return
@@ -106,6 +105,21 @@ function checkForm() {
 title.addEventListener("input", checkForm);
 category.addEventListener("change", checkForm);
 imageUpload.addEventListener("change", checkForm);
+
+document.getElementById('insert-photos').addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        var img = document.createElement('img');
+        img.src = reader.result;
+        var container = document.querySelector('.container-load');
+        container.innerHTML = '';
+        container.appendChild(img);
+    }
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+});
 
 // Ajout de l'événement 'submit' au formulaire
 insertPhotoForm.addEventListener("submit", async (event) => {
