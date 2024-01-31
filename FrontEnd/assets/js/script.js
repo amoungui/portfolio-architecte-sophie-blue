@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function modalData(data) {
         data.forEach((item, i) => {
+            item = item;
             const workElement = document.createElement("figure");
             workElement.classList.add('work-element');
             workElement.dataset.id = item.id; // Ajoutez l'ID de l'élément à l'attribut data-id
@@ -198,7 +199,6 @@ document.addEventListener("DOMContentLoaded", function() {
             workElement.appendChild(linkIcon);
             workElement.appendChild(figcaptionElement);
         });
-        modalData(data)
     }        
 });
 
