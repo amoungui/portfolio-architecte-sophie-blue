@@ -1,3 +1,6 @@
+// Récupération des fiches eventuellement stockées dans le sessionStorage
+let works = window.sessionStorage.getItem("works");
+
 links = {
     "tous": "Tous",
     "objets": "Objets",
@@ -7,7 +10,7 @@ links = {
 
 // Récupération des travaux depuis l'API
 const sectionWorks = document.querySelector(".gallery");
-const works = fetch('http://localhost:5678/api/works')
+works = fetch('http://localhost:5678/api/works')
     .then(response => response.json())
     .then(data => {
         console.log(data);
@@ -145,7 +148,7 @@ window.onload = checkLoginStatus;
 // Ajouter un écouteur d'événements pour le bouton de déconnexion
 const logout = document.querySelector(".nav_menu.logout_hidden");
 logout.addEventListener("click", function (event) {
-    // event.preventDefault();
+    //event.preventDefault();
     // event.stopPropagation(); // Empêche la propagation de l'événement
     localStorage.clear();
     checkLoginStatus();
@@ -154,7 +157,7 @@ logout.addEventListener("click", function (event) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const listOfWorks = document.querySelector(".modal_gallery");
-    const _works = fetch('http://localhost:5678/api/works')
+    fetch('http://localhost:5678/api/works')
         .then(response => response.json())
         .then(data => {
             console.log('data', data);
@@ -163,9 +166,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function modalData(data) {
         data.forEach((item, i) => {
-            const sectionWorks = document.querySelector(".modal_gallery");
             const workElement = document.createElement("figure");
             workElement.classList.add('work-element');
+            workElement.dataset.id = item.id; // Ajoutez l'ID de l'élément à l'attribut data-id
 
             const imageElement = document.createElement("img");
             imageElement.src = item.imageUrl;
@@ -176,41 +179,80 @@ document.addEventListener("DOMContentLoaded", function() {
             trashIcon.classList.add('fa-regular', 'fa-trash-can', 'trash-icon');
 
             const linkIcon = document.createElement("a");
+            linkIcon.href = "javascript:void(0)";
             linkIcon.classList.add('link-icon');
             linkIcon.appendChild(trashIcon);
-
-            linkIcon.addEventListener('click', function(e) {
+            linkIcon.addEventListener('click', async (e) => { // Ajoutez l'événement e à la fonction de rappel
                 e.preventDefault();
-                deleteImage(item);
+                await deleteEntryFromDatabase(item, e);
+                deleteDomElement(item);
             });
 
             const figcaptionElement = document.createElement("figcaption");
             figcaptionElement.style.fontSize = "14px";
 
-            sectionWorks.appendChild(workElement);
+            listOfWorks.appendChild(workElement); // Utilisez listOfWorks au lieu de sectionWorks
             workElement.appendChild(imageElement);
             workElement.appendChild(linkIcon);
             workElement.appendChild(figcaptionElement);
         });
-        return sectionWorks
     }        
 });
 
-function deleteImage(item) {
+async function deleteEntryFromDatabase(item, event) {
+    event.preventDefault();
+
     console.log('item: ', item);
-    token = window.localStorage.getItem("token")
+    var token = window.localStorage.getItem("token")
     console.log(JSON.stringify(token))
-    fetch(`http://localhost:5678/api/works/${item.id}`, {
+   
+    const response = await fetch(`http://localhost:5678/api/works/${item.id}`, {
         method: 'DELETE',
-        headers: {
+        headers: new Headers({
             'Authorization': 'Bearer ' + token
+        })
+    });    
+    if (!response.ok) {
+        throw new Error('Failed to delete entry');
+    }
+}
+
+function deleteDomElement(item) {
+    const element = document.querySelector(`[data-id="${item.id}"]`);
+    if (element) {
+        element.remove();
+    }
+}
+
+/*
+function deleteImage(item, event) {
+    event.preventDefault();
+
+    console.log('item: ', item);
+    var token = window.localStorage.getItem("token")
+    console.log(JSON.stringify(token))
+
+    var request = new Request(`http://localhost:5678/api/works/${item.id}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + token
+        })
+    });
+
+    fetch(request)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        return response.json();
     })
-    .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        // Supprimer l'élément du DOM
+        event.target.parentNode.parentNode.removeChild(event.target.parentNode);
     })
     .catch((error) => {
         console.error('Error:', error);
     });
-}
+}*/
+
