@@ -182,12 +182,14 @@ document.addEventListener("DOMContentLoaded", function() {
             linkIcon.href = "javascript:void(0)";
             linkIcon.classList.add('link-icon');
             linkIcon.appendChild(trashIcon);
-            linkIcon.addEventListener('click', async (e) => { // Ajoutez l'événement e à la fonction de rappel
+            
+            linkIcon.addEventListener('click', async (e) => {
                 e.preventDefault();
+                e.stopPropagation(); // Ajoutez cette ligne
                 await deleteEntryFromDatabase(item, e);
                 deleteDomElement(item);
             });
-
+            
             const figcaptionElement = document.createElement("figcaption");
             figcaptionElement.style.fontSize = "14px";
 
