@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 e.preventDefault();
                 e.stopPropagation(); // Ajoutez cette ligne
                 await deleteEntryFromDatabase(item, e);
-                deleteDomElement(item);
+                deleteDomElement(item); 
             });
             
             const figcaptionElement = document.createElement("figcaption");
@@ -198,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
             workElement.appendChild(linkIcon);
             workElement.appendChild(figcaptionElement);
         });
+        modalData(data)
     }        
 });
 
