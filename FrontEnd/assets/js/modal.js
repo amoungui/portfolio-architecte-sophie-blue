@@ -16,7 +16,7 @@ const openModal1 = async function (e) {
     // Affecte l'élément cible à la variable modal1
     modal1 = target 
     // Ajoute un écouteur d'événement 'click' qui appelle la fonction closeModal1
-    modal1.addEventListener('click', closeModal1) 
+    // modal1.addEventListener('click', closeModal1) 
     // Ajoute un écouteur d'événement 'click' sur l'élément avec la classe '.js-modal-close' qui appelle la fonction closeModal1
     modal1.querySelector('.js-modal-close').addEventListener('click', closeModal1) 
     // Ajoute un écouteur d'événement 'click' sur l'élément avec la classe '.js-modal-stop' qui appelle la fonction stopPropagation
@@ -66,7 +66,7 @@ const openModal2 = async function (e) {
     // Affecte l'élément cible à la variable modal2
     modal2 = target
     // Ajoute un écouteur d'événement 'click' qui appelle la fonction closeModal2
-    modal2.addEventListener('click', closeModal2)
+    // modal2.addEventListener('click', closeModal2)
     // Ajoute un écouteur d'événement 'click' sur l'élément avec la classe '.js-modal-close' qui appelle la fonction closeModal2
     modal2.querySelector('.js-modal-close').addEventListener('click', closeModal2) 
     // Ajoute un écouteur d'événement 'click' sur l'élément avec la classe '.js-modal-stop' qui appelle la fonction stopPropagation
