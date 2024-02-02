@@ -227,35 +227,3 @@ function deleteDomElement(item) {
     }
 }
 
-/*
-function deleteImage(item, event) {
-    event.preventDefault();
-
-    console.log('item: ', item);
-    var token = window.localStorage.getItem("token")
-    console.log(JSON.stringify(token))
-
-    var request = new Request(`http://localhost:5678/api/works/${item.id}`, {
-        method: 'DELETE',
-        headers: new Headers({
-            'Authorization': 'Bearer ' + token
-        })
-    });
-
-    fetch(request)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Success:', data);
-        // Supprimer l'élément du DOM
-        event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}*/
-
