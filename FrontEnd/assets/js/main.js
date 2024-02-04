@@ -108,6 +108,15 @@ async function filterByCategory() {
   links.forEach((link) => {
       link.addEventListener("click", (e) => {
           e.preventDefault();
+
+          // Supprimer la classe active de tous les liens
+          links.forEach((link) => {
+            link.classList.remove("active");
+          });
+
+          // Ajouter la classe active au lien cliqué
+          e.target.classList.add("active");
+
           const linkId = e.target.id;
           gallery.innerHTML = "";
           if (linkId !== "0") {
