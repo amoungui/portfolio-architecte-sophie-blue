@@ -3,7 +3,7 @@
 let token = window.sessionStorage.getItem("token");
 
 //Récupération des fiches eventuellement stockées dans le sessionStorage
-let works = window.sessionStorage.getItem("fiches");
+let works = window.sessionStorage.getItem("works");
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".navigation");
 

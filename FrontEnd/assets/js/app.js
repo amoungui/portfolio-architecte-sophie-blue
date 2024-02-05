@@ -1,6 +1,5 @@
-// Récupération des fiches eventuellement stockées dans le sessionStorage
-let fiches = window.sessionStorage.getItem("fiches");
-//let fiches = null
+// Récupération des works eventuellement stockées dans le sessionStorage
+let works = window.sessionStorage.getItem("works");
 // recup du token dans le session storage
 let token = window.sessionStorage.getItem("token");
 
@@ -101,17 +100,17 @@ window.addEventListener("keydown", function (e) {
 });
 
 //galerie Modal1
-// Création des fiches
-async function genererWorksToModal(fiches) {
+// Création des works
+async function genererWorksToModal(works) {
 	const askApiModal = await fetch("http://localhost:5678/api/works");
-	fiches = await askApiModal.json();
+	works = await askApiModal.json();
 
-	// Récupération de l'élément du DOM qui accueillera les fiches
+	// Récupération de l'élément du DOM qui accueillera les works
 	const sectionGalleryModal = document.querySelector(".galleryModal");
 	sectionGalleryModal.innerHTML = ""
 
-	fiches.forEach((worksModal) => {
-		//création de la balise pour les fiches - balise<figure>
+	works.forEach((worksModal) => {
+		//création de la balise pour les works - balise<figure>
 		const ficheElement = document.createElement("figure");
 		ficheElement.classList.add("figureGallery")
 		ficheElement.dataset.index = worksModal.id
@@ -141,13 +140,13 @@ async function genererWorksToModal(fiches) {
 					"Authorization": `Bearer ${token}`
 				},
 			})
-			window.sessionStorage.removeItem("fiches")
+			window.sessionStorage.removeItem("works")
 			genererWorksToModal()
 		})
 	})
 }
 
-//Création des fiches
+//Création des works
 await genererWorksToModal();
 
 //Todo Faire édition galerie
@@ -215,7 +214,7 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 		body: dataAjout,
 
 	});
-	window.sessionStorage.removeItem("fiches")
+	window.sessionStorage.removeItem("works")
 	title.value = ""
 	categorie.value = "1"
 
