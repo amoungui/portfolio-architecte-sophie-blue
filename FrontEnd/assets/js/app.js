@@ -223,53 +223,81 @@ async function genererWorksToModal(works) {
 // Appel de la fonction pour générer les works
 await genererWorksToModal();
 
-//Todo Faire édition galerie
-
-// Changement modal modal1--> modal2
+// Fonction pour charger une modale à partir d'une URL
 const loadModal = async function (url) {
+	// Extraction de l'identifiant de la modale à partir de l'URL
 	const target = "#" + url.split("#")[1];
+
+	// Recherche de la modale dans le document actuel
 	const existingModal1 = document.querySelector(target);
+
+	// Si la modale existe déjà, on la retourne directement
 	if (existingModal1 !== null) return existingModal1;
+
+	// Sinon, on récupère le code HTML de la page contenant la modale
 	const html = await fetch(url).then((reponse) => reponse.text());
+
+	// On crée un fragment de document à partir du code HTML et on y recherche la modale
 	const element = document.createRange().createContextualFragment(html).querySelector(target).setAttribute("aria-hidden", "false")
+
+	// On cache la modale1 existante
 	existingModal1.document.getElementById("modal1").style.display = "none"
+
+	// Si la modale n'a pas été trouvée dans le code HTML, on lance une exception
 	if (element === null)
 		throw "L'element ${target} na pas été trouvé dans la page ${url}";
+
+	// On ajoute la modale au corps du document
 	document.body.append(element);
+
+	// On retourne l'identifiant de la modale
 	return target;
 };
 
-//modal 2
-//preview image
+// Récupération des éléments du DOM nécessaires pour la modale2
 const imgPreview = document.getElementById("cadreBleu");
-//const choixImage = document.getElementById("btnAjouterPhoto");
 const photo = document.getElementById("btnAjouterPhoto")
 const insertPhotoForm = document.getElementById("insertPhotos");
 const title = document.getElementById("titrePhoto")
 const categorie = document.getElementById("categoriePhoto")
 const elementGris = document.getElementById("validerAjoutPhoto")
 
-//gestion du bouton valider
+// Désactivation du bouton de validation et changement de sa couleur en gris
 elementGris.disabled = true
 elementGris.style.backgroundColor = "grey"
+
+// Ajout d'un écouteur d'événement sur le champ de sélection de photo
 photo.addEventListener("change", function () {
+	// Réactivation du bouton de validation et suppression de son style personnalisé
 	elementGris.removeAttribute("style")
 	elementGris.disabled = false
+
+	// Appel de la fonction pour récupérer et afficher la photo choisie
 	getImgData();
 });
 
-//Recupere et affiche la photo choisie
+// Fonction pour récupérer et afficher la photo choisie
 function getImgData() {
+	// Récupération du fichier choisi
 	const files = btnAjouterPhoto.files[0];
+
+	// Si un fichier a été choisi
 	if (files) {
+		// Création d'un nouvel objet FileReader
 		const fileReader = new FileReader();
+
+		// Lecture du fichier en tant que Data URL
 		fileReader.readAsDataURL(files);
+
+		// Ajout d'un écouteur d'événement pour afficher la photo une fois qu'elle est chargée
 		fileReader.addEventListener("load", function () {
+			// Affichage de la photo dans l'élément imgPreview
 			imgPreview.style.display = "block";
 			imgPreview.innerHTML = '<img src="' + this.result + '" />';
 		});
 	}
 }
+
 
 //Ajout de photo à la galerie
 insertPhotoForm.addEventListener("submit", async (event) => {
