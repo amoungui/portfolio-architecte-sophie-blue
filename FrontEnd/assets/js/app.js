@@ -299,28 +299,34 @@ function getImgData() {
 }
 
 
-//Ajout de photo à la galerie
+// Ajout d'un écouteur d'événement sur le formulaire d'insertion de photo
 insertPhotoForm.addEventListener("submit", async (event) => {
+	// Prévention du comportement par défaut du formulaire
 	event.preventDefault();
 
+	// Création d'un nouvel objet FormData pour stocker les données du formulaire
 	const dataAjout = new FormData()
 	dataAjout.append("title", title.value)
 	dataAjout.append("category", categorie.value)
 	dataAjout.append("image", photo.files[0])
 
+	// Envoi des données du formulaire à l'API
 	const projet = await fetch("http://localhost:5678/api/works", {
 		method: "POST",
 		headers: {
 			"Authorization": `Bearer ${token}`
 		},
 		body: dataAjout,
-
 	});
+
+	// Suppression des works du sessionStorage
 	window.sessionStorage.removeItem("works")
+
+	// Réinitialisation des champs du formulaire
 	title.value = ""
 	categorie.value = "1"
 
-	//reconstruction de l'ajout photo
+	// Reconstruction de l'ajout de photo
 	imgPreview.style.display = null
 	imgPreview.innerHTML = ""
 	const imgIconePicture = document.createElement("img")
@@ -344,15 +350,24 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 	imgPreview.appendChild(pAJouterPhoto)
 	labelAjouterPhoto.appendChild(inputAjouterPhoto)
 
+	// Désactivation du bouton de validation et changement de sa couleur en gris
 	elementGris.disabled = true
 	elementGris.style.backgroundColor = "grey"
+
+	// Ajout d'un écouteur d'événement sur le champ de sélection de photo
 	inputAjouterPhoto.addEventListener("change", function () {
+		// Réactivation du bouton de validation et suppression de son style personnalisé
 		elementGris.removeAttribute("style")
 		elementGris.disabled = false
+
+		// Appel de la fonction pour récupérer et afficher la photo choisie
 		getImgData(inputAjouterPhoto);
 	});
 
+	// Génération des works dans la modale
 	genererWorksToModal()
+
+	// Fermeture de la modale2 et ouverture de la modale1
 	closeModal2()
 	openModal1()
 });
