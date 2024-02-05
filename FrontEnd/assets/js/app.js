@@ -1,44 +1,91 @@
-// Récupération des works eventuellement stockées dans le sessionStorage
+// Récupération des works éventuellement stockées dans le sessionStorage
 let works = window.sessionStorage.getItem("works");
-// recup du token dans le session storage
+
+// Récupération du token dans le sessionStorage
 let token = window.sessionStorage.getItem("token");
 
-// declaration des modales
+// Déclaration des modales
 let modal1 = document.getElementById("modal1");
 let modal2 = document.getElementById("modal2");
 
-//focus pour tab
+// Sélecteur pour les éléments pouvant recevoir le focus
 const focusableSelector = "button, a, input, textarea";
+
+// Initialisation du tableau qui contiendra les éléments pouvant recevoir le focus
 let focusables = [];
+
+// Initialisation de la variable qui contiendra l'élément ayant le focus avant l'ouverture de la modale
 let focusElementPrecedent = null;
 
-// ouverture de la modale1
+// Fonction pour ouvrir la modale1
 const openModal1 = async function (e) {
+	// Prévention du comportement par défaut si un événement est passé en paramètre
 	if (e) e.preventDefault();
+
+	// Récupération des éléments pouvant recevoir le focus dans la modale1
 	focusables = Array.from(modal1.querySelectorAll(focusableSelector));
+
+	// Stockage de l'élément actuellement focus
 	focusElementPrecedent = document.querySelector(":focus");
+
+	// Affichage de la modale1
 	modal1.style.display = null;
+
+	// Focus sur le premier élément pouvant recevoir le focus dans la modale1
 	focusables[0].focus();
+
+	// Suppression de l'attribut "aria-hidden" de la modale1
 	modal1.removeAttribute("aria-hidden");
+
+	// Ajout de l'attribut "aria-modal" à la modale1
 	modal1.setAttribute("aria-modal", "true");
+
+	// Ajout d'un écouteur d'événement pour fermer la modale1 lors d'un clic en dehors
 	modal1.addEventListener("click", closeModal1);
+
+	// Ajout d'un écouteur d'événement pour fermer la modale1 lors d'un clic sur le bouton de fermeture
 	modal1.querySelector(".jsCloseModal").addEventListener("click", closeModal1);
+
+	// Ajout d'un écouteur d'événement pour stopper la propagation de l'événement lors d'un clic à l'intérieur de la modale1
 	modal1.querySelector(".jsModalStop").addEventListener("click", stopEvent);
 };
-// ouverture de la modale2
+
+// Fonction pour ouvrir la modale2
 const openModal2 = async function (e) {
+	// Prévention du comportement par défaut si un événement est passé en paramètre
 	if (e) e.preventDefault();
+
+	// Récupération des éléments pouvant recevoir le focus dans la modale2
 	focusables = Array.from(modal2.querySelectorAll(focusableSelector));
+
+	// Stockage de l'élément actuellement focus
 	focusElementPrecedent = document.querySelector(":focus");
+
+	// Affichage de la modale2
 	modal2.style.display = null;
+
+	// Focus sur le premier élément pouvant recevoir le focus dans la modale2
 	focusables[0].focus();
+
+	// Suppression de l'attribut "aria-hidden" de la modale2
 	modal2.removeAttribute("aria-hidden");
+
+	// Ajout de l'attribut "aria-modal" à la modale2
 	modal2.setAttribute("aria-modal", "true");
+
+	// Ajout d'un écouteur d'événement pour fermer la modale2 lors d'un clic en dehors
 	modal2.addEventListener("click", closeModal2);
+
+	// Ajout d'un écouteur d'événement pour fermer la modale2 lors d'un clic sur le bouton de fermeture
 	modal2.querySelector(".jsCloseModal").addEventListener("click", closeModal2);
+
+	// Ajout d'un écouteur d'événement pour stopper la propagation de l'événement lors d'un clic à l'intérieur de la modale2
 	modal2.querySelector(".jsModalStop").addEventListener("click", stopEvent);
+
+	// Fermeture de la modale1
 	closeModal1()
 };
+
 // fermeture de la modale1
 const closeModal1 = function (e) {
 	if (e) { e.preventDefault() };
