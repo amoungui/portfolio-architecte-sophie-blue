@@ -151,27 +151,30 @@ const focusInModal = function (e) {
 };
 
 
-// lien pour ouvrir la modal1
+// Ajout d'un écouteur d'événement sur tous les éléments avec la classe ".jsModifier" pour ouvrir la modale1
 document.querySelectorAll(".jsModifier").forEach((a) => {
 	a.addEventListener("click", openModal1);
 });
-// lien pour ouvrir la modal2
+
+// Ajout d'un écouteur d'événement sur l'élément avec la classe ".btnAjouterPhotoModal1" pour ouvrir la modale2
 document.querySelector(".btnAjouterPhotoModal1").addEventListener("click", openModal2)
 
-// gestion touche escape
+// Ajout d'un écouteur d'événement sur la fenêtre pour gérer la touche Escape et Tab
 window.addEventListener("keydown", function (e) {
+	// Si la touche Escape est pressée, on ferme les modales
 	if (e.key === "Escape" || e.key === "Esc") {
 		closeModal1(e);
 		closeModal2(e);
 	}
+	// Si la touche Tab est pressée et que la modale1 est ouverte, on gère le focus dans la modale
 	if (e.key === "Tab" && modal1 !== null) {
 		focusInModal(e);
 	}
 });
 
-//galerie Modal1
-// Création des works
+// Fonction pour générer les works dans la modale1
 async function genererWorksToModal(works) {
+	// Appel à l'API pour récupérer les works
 	const askApiModal = await fetch("http://localhost:5678/api/works");
 	works = await askApiModal.json();
 
@@ -179,6 +182,7 @@ async function genererWorksToModal(works) {
 	const sectionGalleryModal = document.querySelector(".galleryModal");
 	sectionGalleryModal.innerHTML = ""
 
+	// Pour chaque work, on crée une balise <figure> avec une image et un bouton de suppression
 	works.forEach((worksModal) => {
 		//création de la balise pour les works - balise<figure>
 		const ficheElement = document.createElement("figure");
@@ -190,7 +194,7 @@ async function genererWorksToModal(works) {
 		const imageElement = document.createElement("img");
 		imageElement.src = worksModal.imageUrl;
 
-		// On rattache la balise article a la div galleryModal
+		// On rattache la balise <figure> à la div .galleryModal
 		sectionGalleryModal.appendChild(ficheElement);
 
 		//Rattachement de les balises au DOM
@@ -216,7 +220,7 @@ async function genererWorksToModal(works) {
 	})
 }
 
-//Création des works
+// Appel de la fonction pour générer les works
 await genererWorksToModal();
 
 //Todo Faire édition galerie
