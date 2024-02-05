@@ -102,8 +102,7 @@ window.addEventListener("keydown", function (e) {
 
 //galerie Modal1
 // Création des fiches
-async function genererFicheModal(fiches) {
-
+async function genererWorksToModal(fiches) {
 	const askApiModal = await fetch("http://localhost:5678/api/works");
 	fiches = await askApiModal.json();
 
@@ -111,9 +110,7 @@ async function genererFicheModal(fiches) {
 	const sectionGalleryModal = document.querySelector(".galleryModal");
 	sectionGalleryModal.innerHTML = ""
 
-	for (let i = 0; i < fiches.length; i++) {
-		const worksModal = fiches[i];
-
+	fiches.forEach((worksModal) => {
 		//création de la balise pour les fiches - balise<figure>
 		const ficheElement = document.createElement("figure");
 		ficheElement.classList.add("figureGallery")
@@ -129,12 +126,13 @@ async function genererFicheModal(fiches) {
 
 		//Rattachement de les balises au DOM
 		ficheElement.appendChild(imageElement);
-	}
+	})
+
 	//Supprime projet
 	//Todo Ajouter message de confirmation de suppression
 	const deleteProjet = document.querySelectorAll(".btnTrash")
-	for (let i = 0; i < deleteProjet.length; i++) {
-		deleteProjet[i].addEventListener("click", async (e) => {
+	deleteProjet.forEach((btn) => {
+		btn.addEventListener("click", async (e) => {
 			e.preventDefault();
 			const id = e.target.parentNode.dataset.index
 			const projetDelete = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -144,12 +142,13 @@ async function genererFicheModal(fiches) {
 				},
 			})
 			window.sessionStorage.removeItem("fiches")
-			genererFicheModal()
+			genererWorksToModal()
 		})
-	}
+	})
 }
+
 //Création des fiches
-await genererFicheModal();
+await genererWorksToModal();
 
 //Todo Faire édition galerie
 
@@ -176,10 +175,6 @@ const insertPhotoForm = document.getElementById("insertPhotos");
 const title = document.getElementById("titrePhoto")
 const categorie = document.getElementById("categoriePhoto")
 const elementGris = document.getElementById("validerAjoutPhoto")
-
-/*photo.addEventListener("change", function () {
-	getImgData();
-});*/
 
 //gestion du bouton valider
 elementGris.disabled = true
@@ -256,10 +251,7 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 		getImgData(inputAjouterPhoto);
 	});
 
-	genererFicheModal()
+	genererWorksToModal()
 	closeModal2()
 	openModal1()
 });
-
-/*Todo supprimer completement la galerie*/
-//deleteGallery() {}
