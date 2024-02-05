@@ -1,9 +1,9 @@
+/******* Variables globaux *******/
 // recup du token dans le session storage
 let token = window.sessionStorage.getItem("token");
 
 //Récupération des fiches eventuellement stockées dans le sessionStorage
-let fiches = window.sessionStorage.getItem("fiches");
-/******* Variables globaux *******/
+let works = window.sessionStorage.getItem("fiches");
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".navigation");
 
@@ -22,27 +22,19 @@ if (token) {
   document.getElementById("login").style.display = "none";
 }
 
-async function getWorks() {
-  const response = await fetch('http://localhost:5678/api/works');
-  return await response.json();
-}
-getWorks();
-
 // Récupération des fiches depuis l'api
 const askApi = await fetch("http://localhost:5678/api/works");
-fiches = await askApi.json();
+works = await askApi.json();
 
 
 // Création des Fiches Projets
-async function genererFiches(fiches) {
+async function genererWorks(works) {
 
   // Récupération de l'élément du DOM qui accueille les fiches
   const sectionGallery = document.querySelector(".gallery");
   sectionGallery.innerHTML = ""
 
-  for (let i = 0; i < fiches.length; i++) {
-    const works = fiches[i];
-
+  works.forEach((work) => {
     //création de la balise pour les fiches - balise<figure>
     const ficheElement = document.createElement("figure");
     ficheElement.classList.add("figureGallery")
@@ -50,9 +42,9 @@ async function genererFiches(fiches) {
 
     //Création des images
     const imageElement = document.createElement("img");
-    imageElement.src = works.imageUrl;
+    imageElement.src = work.imageUrl;
     const titleElement = document.createElement("figcaption");
-    titleElement.innerText = works.title;
+    titleElement.innerText = work.title;
 
     // On rattache la balise <article> a la <div gallery>
     sectionGallery.appendChild(ficheElement);
@@ -60,11 +52,11 @@ async function genererFiches(fiches) {
     //Rattachement de des balises au DOM
     ficheElement.appendChild(imageElement);
     ficheElement.appendChild(titleElement);
-  }
+  })
 }
 
 //Création des fiches
-await genererFiches(fiches);
+await genererWorks(works);
 
 //Filtres
 //***************Affichage des boutons par catégories*************/
@@ -120,13 +112,13 @@ async function filterByCategory() {
           const linkId = e.target.id;
           gallery.innerHTML = "";
           if (linkId !== "0") {
-              const worksFilterByCategory = fiches.filter((work) => {
+              const worksFilterByCategory = works.filter((work) => {
               return work.categoryId == linkId;
               });
-              genererFiches(worksFilterByCategory);
+              genererWorks(worksFilterByCategory);
               
           } else {
-            genererFiches(fiches)
+            genererWorks(works)
           }
           console.log(linkId);
       });
