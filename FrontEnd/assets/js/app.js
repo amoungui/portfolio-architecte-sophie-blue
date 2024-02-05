@@ -86,47 +86,70 @@ const openModal2 = async function (e) {
 	closeModal1()
 };
 
-// fermeture de la modale1
+// Fonction pour fermer la modale1
 const closeModal1 = function (e) {
+	// Si un événement est passé en paramètre, on prévient son comportement par défaut
 	if (e) { e.preventDefault() };
+
+	// On cache la modale1
 	modal1.style.display = "none"
 }
-// fermeture de la modale2
+
+// Fonction pour fermer la modale2
 const closeModal2 = function (e) {
+	// Si un événement est passé en paramètre, on prévient son comportement par défaut
 	if (e) { e.preventDefault() };
+
+	// On cache la modale2
 	modal2.style.display = "none"
 }
-// retour de la modale1
+
+// Récupération du bouton de retour
 const btnBack = document.querySelector(".back");
+
+// Ajout d'un écouteur d'événement sur le bouton de retour
 btnBack.addEventListener("click", (e) => {
+	// On ferme la modale2
 	closeModal2()
+
+	// On ouvre la modale1
 	openModal1()
 });
 
-// bloque evenement
+// Fonction pour bloquer la propagation d'un événement
 const stopEvent = function (e) {
 	e.stopPropagation();
 };
 
-//focus dans la modale
+// Fonction pour gérer le focus dans la modale
 const focusInModal = function (e) {
+	// On prévient le comportement par défaut de l'événement
 	e.preventDefault();
 
+	// On récupère l'index de l'élément actuellement focus dans la modale1
 	let index = focusables.findIndex((f) => f === modal1.querySelector(":focus"));
+
+	// Si la touche Shift est enfoncée, on décrémente l'index, sinon on l'incrémente
 	if (e.shiftKey === true) {
 		index--
 	} else {
 		index++;
 	}
 
+	// Si l'index est supérieur ou égal à la longueur du tableau des éléments pouvant recevoir le focus, on le réinitialise à 0
 	if (index >= focusables.length) {
 		index = 0;
 	}
+
+	// Si l'index est inférieur à 0, on le met à la longueur du tableau des éléments pouvant recevoir le focus moins 1
 	if (index < 0) {
 		index = focusables.length - 1;
 	}
+
+	// On donne le focus à l'élément correspondant à l'index
 	focusables[index].focus();
 };
+
 
 // lien pour ouvrir la modal1
 document.querySelectorAll(".jsModifier").forEach((a) => {
