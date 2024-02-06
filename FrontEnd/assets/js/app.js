@@ -261,6 +261,7 @@ const insertPhotoForm = document.getElementById("insertPhotos");
 const title = document.getElementById("titrePhoto")
 const categorie = document.getElementById("categoriePhoto")
 const elementGris = document.getElementById("validerAjoutPhoto")
+photo.value = "" // Réinitialisation du champ de fichier
 
 // Désactivation du bouton de validation et changement de sa couleur en gris
 elementGris.disabled = true
@@ -277,25 +278,39 @@ photo.addEventListener("change", function () {
 });
 
 // Fonction pour récupérer et afficher la photo choisie
-function getImgData() {
-	// Récupération du fichier choisi
-	const files = btnAjouterPhoto.files[0];
+async function getImgData() {
+    // Récupération du fichier choisi
+    const file = btnAjouterPhoto.files[0];
 
-	// Si un fichier a été choisi
-	if (files) {
-		// Création d'un nouvel objet FileReader
-		const fileReader = new FileReader();
+    // Si un fichier a été choisi
+    if (file) {
+        // Options pour la compression de l'image
+        const options = {
+            maxSizeMB: 1, // (max file size in MB)
+            maxWidthOrHeight: 1920, // (max width or height in pixel)
+            useWebWorker: true // (optional, use multi-threading for better performance)
+        }
 
-		// Lecture du fichier en tant que Data URL
-		fileReader.readAsDataURL(files);
+        try {
+            // Compression de l'image
+            const compressedFile = await imageCompression(file, options);
 
-		// Ajout d'un écouteur d'événement pour afficher la photo une fois qu'elle est chargée
-		fileReader.addEventListener("load", function () {
-			// Affichage de la photo dans l'élément imgPreview
-			imgPreview.style.display = "block";
-			imgPreview.innerHTML = '<img src="' + this.result + '" />';
-		});
-	}
+            // Création d'un nouvel objet FileReader
+            const fileReader = new FileReader();
+
+            // Lecture du fichier en tant que Data URL
+            fileReader.readAsDataURL(compressedFile);
+
+            // Ajout d'un écouteur d'événement pour afficher la photo une fois qu'elle est chargée
+            fileReader.addEventListener("load", function () {
+                // Affichage de la photo dans l'élément imgPreview
+                imgPreview.style.display = "block";
+                imgPreview.innerHTML = `<img src="${this.result}" />`;
+            });
+        } catch (error) {
+            console.error('Erreur lors de la compression de l\'image : ', error);
+        }
+    }
 }
 
 
@@ -328,6 +343,7 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 	// Réinitialisation des champs du formulaire
 	title.value = ""
 	categorie.value = "1"
+	// photo.value = "" // Réinitialisation du champ de fichier
 
 	// Reconstruction de l'ajout de photo
 	imgPreview.style.display = null
