@@ -310,8 +310,11 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 	dataAjout.append("category", categorie.value)
 	dataAjout.append("image", photo.files[0])
 
-	// Envoi des données du formulaire à l'API
-	const projet = await fetch("http://localhost:5678/api/works", {
+	// Génération d'un timestamp unique
+	const timestamp = Date.now();
+
+	// Envoi des données du formulaire à l'API avec le timestamp comme paramètre
+	const projet = await fetch(`http://localhost:5678/api/works?timestamp=${timestamp}`, {
 		method: "POST",
 		headers: {
 			"Authorization": `Bearer ${token}`
