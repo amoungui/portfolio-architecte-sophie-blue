@@ -127,7 +127,12 @@ a:hover {
 .login_hidden {
     display: none;
 }
-
+#notification {
+	background-color: #B1663C;
+	color: white;
+	margin: 3%;
+	padding: 4%;
+}
 
 #introduction {
 	display: flex;
