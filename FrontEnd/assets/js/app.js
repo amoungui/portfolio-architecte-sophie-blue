@@ -172,6 +172,35 @@ window.addEventListener("keydown", function (e) {
 	}
 });
 
+// Fonction pour générer les works dans la galerie
+async function genererWorksToGallery() {
+	// Appel à l'API pour récupérer les works
+	const askApiModal = await fetch("http://localhost:5678/api/works");
+	works = await askApiModal.json();
+
+	// Récupération de l'élément du DOM qui accueillera les works
+	const sectionGallery = document.querySelector(".gallery");
+	sectionGallery.innerHTML = ""
+  
+	// Pour chaque work, on crée une balise <figure> avec une image et un titre
+	works.forEach((work) => {
+	  const ficheElement = document.createElement("figure");
+	  ficheElement.classList.add("figureGallery")
+	  ficheElement.dataset.index = works.id
+  
+	  const imageElement = document.createElement("img");
+	  imageElement.src = work.imageUrl;
+	  const titleElement = document.createElement("figcaption");
+	  titleElement.innerText = work.title;
+  
+	  sectionGallery.appendChild(ficheElement);
+	  ficheElement.appendChild(imageElement);
+	  ficheElement.appendChild(titleElement);
+	})
+}
+
+await genererWorksToGallery()
+
 // Fonction pour générer les works dans la modale1
 async function genererWorksToModal(works) {
 	// Appel à l'API pour récupérer les works
@@ -216,8 +245,10 @@ async function genererWorksToModal(works) {
 			})
 			window.sessionStorage.removeItem("works")
 			genererWorksToModal()
+			genererWorksToGallery() // Supposons que c'est la fonction qui génère la galerie
 		})
 	})
+
 }
 
 // Appel de la fonction pour générer les works
@@ -253,6 +284,7 @@ const loadModal = async function (url) {
 	// On retourne l'identifiant de la modale
 	return target;
 };
+
 
 // Récupération des éléments du DOM nécessaires pour la modale2
 const imgPreview = document.getElementById("cadreBleu");
@@ -343,7 +375,8 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 	// Réinitialisation des champs du formulaire
 	title.value = ""
 	categorie.value = "1"
-	// photo.value = "" // Réinitialisation du champ de fichier
+    // Réinitialisation du champ de fichier
+    // photo.value = "";
 
 	// Reconstruction de l'ajout de photo
 	imgPreview.style.display = null
