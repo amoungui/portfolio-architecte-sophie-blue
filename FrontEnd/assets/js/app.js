@@ -245,7 +245,8 @@ async function genererWorksToModal(works) {
 			})
 			window.sessionStorage.removeItem("works")
 			genererWorksToModal()
-			genererWorksToGallery() // Supposons que c'est la fonction qui génère la galerie
+			// cette fonction permet de génèrer la galerie
+			genererWorksToGallery()
 		})
 	})
 
@@ -418,7 +419,8 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 
 	// Génération des works dans la modale
 	genererWorksToModal()
-
+	// cette fonction permet de génèrer la galerie
+	genererWorksToGallery()
 	// Fermeture de la modale2 et ouverture de la modale1
 	closeModal2()
 	openModal1()
