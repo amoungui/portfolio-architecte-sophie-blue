@@ -1,6 +1,3 @@
-// Récupération des works éventuellement stockées dans le sessionStorage
-let works = window.sessionStorage.getItem("works");
-
 // Récupération du token dans le sessionStorage
 let token = window.sessionStorage.getItem("token");
 
@@ -243,7 +240,6 @@ async function genererWorksToModal(works) {
 					"Authorization": `Bearer ${token}`
 				},
 			})
-			window.sessionStorage.removeItem("works")
 			genererWorksToModal()
 			// cette fonction permet de génèrer la galerie
 			genererWorksToGallery()
@@ -378,10 +374,6 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 
 	// Réinitialisation des champs du formulaire insertPhotos
 	document.getElementById('insertPhotos').reset();
-	// title.value = ""
-	// categorie.value = "1"
-    // Réinitialisation du champ de fichier
-    // photo.value = "";
 
 	// Reconstruction de l'ajout de photo
 	imgPreview.style.display = null

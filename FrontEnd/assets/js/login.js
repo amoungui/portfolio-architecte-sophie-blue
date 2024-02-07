@@ -37,7 +37,8 @@ loginForm.addEventListener("submit", async (event) => {
 
     // Si la réponse ne contient pas de token, on affiche une alerte avec le statut de la réponse
     if (data.token == null) {
-      alert("This user is  "+login.statusText)
+      notification.innerHTML = "This user is  "+login.statusText;
+      notification.style.display = null;
     } else {
       // Sinon, on stocke le token dans le sessionStorage et on redirige l'utilisateur vers la page index.html
       window.sessionStorage.setItem("token", data.token);
