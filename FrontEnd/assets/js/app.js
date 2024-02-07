@@ -289,12 +289,12 @@ const loadModal = async function (url) {
 
 // Récupération des éléments du DOM nécessaires pour la modale2
 const imgPreview = document.getElementById("cadreBleu");
-const photo = document.getElementById("btnAjouterPhoto")
+const photo = document.getElementById("btnAjouterPhoto");
 const insertPhotoForm = document.getElementById("insertPhotos");
-const title = document.getElementById("titrePhoto")
-const categorie = document.getElementById("categoriePhoto")
-const elementGris = document.getElementById("validerAjoutPhoto")
-photo.value = "" // Réinitialisation du champ de fichier
+const title = document.getElementById("titrePhoto");
+const categorie = document.getElementById("categoriePhoto");
+const elementGris = document.getElementById("validerAjoutPhoto");
+let newPhoto = null;
 
 // Désactivation du bouton de validation et changement de sa couleur en gris
 elementGris.disabled = true
@@ -314,6 +314,8 @@ photo.addEventListener("change", function () {
 async function getImgData() {
     // Récupération du fichier choisi
     const file = btnAjouterPhoto.files[0];
+	newPhoto = file
+	console.log('getImage file: ', newPhoto);
 
     // Si un fichier a été choisi
     if (file) {
@@ -337,12 +339,13 @@ async function getImgData() {
             // Ajout d'un écouteur d'événement pour afficher la photo une fois qu'elle est chargée
             fileReader.addEventListener("load", function () {
                 // Affichage de la photo dans l'élément imgPreview
+				console.log('la reference de image courante: ', this.result);
                 imgPreview.style.display = "block";
                 imgPreview.innerHTML = `<img src="${this.result}" />`;
             });
         } catch (error) {
             console.error('Erreur lors de la compression de l\'image : ', error);
-        }
+        }	
     }
 }
 
@@ -351,12 +354,12 @@ async function getImgData() {
 insertPhotoForm.addEventListener("submit", async (event) => {
 	// Prévention du comportement par défaut du formulaire
 	event.preventDefault();
-
+	// console.log('au sein de l\'événement d\'insertion', newPhoto);
 	// Création d'un nouvel objet FormData pour stocker les données du formulaire
 	const dataAjout = new FormData()
 	dataAjout.append("title", title.value)
 	dataAjout.append("category", categorie.value)
-	dataAjout.append("image", photo.files[0])
+	dataAjout.append("image", newPhoto)
 
 	// Génération d'un timestamp unique
 	const timestamp = Date.now();
@@ -373,9 +376,10 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 	// Suppression des works du sessionStorage
 	window.sessionStorage.removeItem("works")
 
-	// Réinitialisation des champs du formulaire
-	title.value = ""
-	categorie.value = "1"
+	// Réinitialisation des champs du formulaire insertPhotos
+	document.getElementById('insertPhotos').reset();
+	// title.value = ""
+	// categorie.value = "1"
     // Réinitialisation du champ de fichier
     // photo.value = "";
 
