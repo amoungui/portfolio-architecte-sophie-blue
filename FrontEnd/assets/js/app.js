@@ -1,3 +1,6 @@
+// Récupération des works éventuellement stockées dans le sessionStorage
+let works = window.sessionStorage.getItem("works");
+
 // Récupération du token dans le sessionStorage
 let token = window.sessionStorage.getItem("token");
 
