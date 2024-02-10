@@ -20,6 +20,7 @@ if (token) {
   for (let i = 0; i < jsEdition.length; i++) {
     jsEdition[i].style.display = null;
   }
+  filters.style.display = "none";
   document.getElementById("login").style.display = "none";
 }
 

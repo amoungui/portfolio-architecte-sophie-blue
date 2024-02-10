@@ -30,6 +30,7 @@ loginForm.addEventListener("submit", async (event) => {
         "Content-Type": "application/json",
       },
       body: bodyJson,
+      // ajouter la partie cache
     });
 
     // Récupération de la réponse de l'API
