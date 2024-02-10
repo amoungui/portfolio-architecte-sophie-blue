@@ -389,7 +389,7 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 	const timestamp = Date.now();
 
 	// Envoi des données du formulaire à l'API avec le timestamp comme paramètre
-	const projet = await fetch(`http://localhost:5678/api/works?timestamp=${timestamp}`, {
+	const response = await fetch(`http://localhost:5678/api/works?timestamp=${timestamp}`, {
 		method: "POST",
 		headers: {
 			"Authorization": `Bearer ${token}`
