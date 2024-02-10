@@ -299,15 +299,40 @@ let newPhoto = null;
 elementGris.disabled = true
 elementGris.style.backgroundColor = "grey"
 
+// Fonction pour vérifier si tous les champs sont remplis
+function checkFields() {
+    return title.value && categorie.value && newPhoto;
+}
+
 // Ajout d'un écouteur d'événement sur le champ de sélection de photo
 photo.addEventListener("change", function () {
-	// Réactivation du bouton de validation et suppression de son style personnalisé
-	elementGris.removeAttribute("style")
-	elementGris.disabled = false
+    // Appel de la fonction pour récupérer et afficher la photo choisie
+    getImgData();
 
-	// Appel de la fonction pour récupérer et afficher la photo choisie
-	getImgData();
+    // Vérifiez si tous les champs sont remplis
+    if (checkFields()) {
+        // Si tous les champs sont remplis, réactivez le bouton de validation et supprimez son style personnalisé
+        elementGris.removeAttribute("style");
+        elementGris.disabled = false;
+    }
 });
+
+// Ajout d'écouteurs d'événements sur les autres champs du formulaire
+title.addEventListener('input', checkForm);
+categorie.addEventListener('input', checkForm);
+
+function checkForm() {
+    if (checkFields()) {
+        // Si tous les champs sont remplis, réactivez le bouton de validation et supprimez son style personnalisé
+        elementGris.removeAttribute("style");
+        elementGris.disabled = false;
+    } else {
+        // Si tous les champs ne sont pas remplis, désactivez le bouton de validation et changez sa couleur en gris
+        elementGris.style.backgroundColor = "grey";
+        elementGris.disabled = true;
+    }
+}
+
 
 // Fonction pour récupérer et afficher la photo choisie
 async function getImgData() {
