@@ -397,6 +397,15 @@ insertPhotoForm.addEventListener("submit", async (event) => {
 		body: dataAjout,
 	});
 
+	// Vérifiez si la requête a réussi
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	} else {
+		// Lorsque la requête réussit, mettez la réponse en cache
+		const cache = await caches.open('CacheChargeUtil');
+		cache.put(`http://localhost:5678/api/works?timestamp=${timestamp}`, response.clone());
+	}
+
 	// Suppression des works du sessionStorage
 	window.sessionStorage.removeItem("works")
 
