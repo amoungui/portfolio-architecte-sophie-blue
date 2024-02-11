@@ -22,7 +22,6 @@ loginForm.addEventListener("submit", async (event) => {
       email: email.value,
       password: password.value,
     });
-    console.log(bodyJson);
     // Envoi de la requête de connexion à l'API
     const login = await fetch("http://localhost:5678/api/users/login", {
       method: "POST",

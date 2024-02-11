@@ -339,7 +339,6 @@ async function getImgData() {
     // Récupération du fichier choisi
     const file = btnAjouterPhoto.files[0];
 	newPhoto = file
-	console.log('getImage file: ', newPhoto);
 
     // Si un fichier a été choisi
     if (file) {
@@ -363,7 +362,6 @@ async function getImgData() {
             // Ajout d'un écouteur d'événement pour afficher la photo une fois qu'elle est chargée
             fileReader.addEventListener("load", function () {
                 // Affichage de la photo dans l'élément imgPreview
-				console.log('la reference de image courante: ', this.result);
                 imgPreview.style.display = "block";
                 imgPreview.innerHTML = `<img src="${this.result}" />`;
             });
@@ -378,7 +376,6 @@ async function getImgData() {
 insertPhotoForm.addEventListener("submit", async (event) => {
 	// Prévention du comportement par défaut du formulaire
 	event.preventDefault();
-	// console.log('au sein de l\'événement d\'insertion', newPhoto);
 	// Création d'un nouvel objet FormData pour stocker les données du formulaire
 	const dataAjout = new FormData()
 	dataAjout.append("title", title.value)
